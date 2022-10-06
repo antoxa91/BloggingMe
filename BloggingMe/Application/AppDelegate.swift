@@ -4,7 +4,7 @@
 //
 //  Created by Антон Стафеев on 06.10.2022.
 //
-
+import FirebaseCore
 import UIKit
 
 @main
@@ -13,7 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        FirebaseApp.configure()
         return true
     }
 
