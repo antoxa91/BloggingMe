@@ -13,6 +13,14 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        
+        DispatchQueue.main.async {
+            if !IAPManager.shared.isPremium() {
+                let vc = PayWallViewController()
+                
+                self.present(vc, animated: true)
+            }
+        }
     }
 
 

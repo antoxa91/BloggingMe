@@ -14,5 +14,13 @@ class SignInViewController: UIViewController {
         title = "Sign In"
         view.backgroundColor = .systemBackground
         
+        DispatchQueue.main.async {
+            if !IAPManager.shared.isPremium() {
+                let vc = PayWallViewController()
+                let navVC = UINavigationController(rootViewController: vc)
+                self.present(navVC, animated: true)
+            }
+        }
+
     }
 }
