@@ -12,18 +12,18 @@ class PayWallDescriptionView: UIView {
     private let descriptionLabel: UILabel = {
        let label = UILabel()
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 26, weight: .medium)
         label.numberOfLines = 0
         label.text = "Join BloggingMe Premium to read unlimited articles and browse thousands of posts!"
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let priceLabel: UILabel = {
        let label = UILabel()
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 22, weight: .regular)
         label.numberOfLines = 1
         label.text = "0.99$ / month"
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -32,6 +32,8 @@ class PayWallDescriptionView: UIView {
         clipsToBounds = true
         addSubview(priceLabel)
         addSubview(descriptionLabel)
+        translatesAutoresizingMaskIntoConstraints = false
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -40,9 +42,19 @@ class PayWallDescriptionView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        descriptionLabel.frame = CGRect(x: 20, y: 0, width: width - 40, height: height/2)
-        priceLabel.frame = CGRect(x: 20, y: height/2, width: width - 40, height: height/2)
-
+        descriptionLabel.font = .systemFont(ofSize: frame.width/15, weight: .medium)
+        priceLabel.font = .systemFont(ofSize: frame.width/18, weight: .regular)
     }
     
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            descriptionLabel.topAnchor.constraint(equalTo: topAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            descriptionLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6),
+            
+            priceLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+        ])
+    }
 }

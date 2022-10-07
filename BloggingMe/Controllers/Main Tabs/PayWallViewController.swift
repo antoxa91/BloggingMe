@@ -18,27 +18,30 @@ class PayWallViewController: UIViewController {
         textView.isEditable = false
         textView.textAlignment = .center
         textView.textColor = .secondaryLabel
-        textView.font = .systemFont(ofSize: 14)
         textView.text = "This is an auto-renewable Subscription. It wil be charged to your Apple account before each pay period. You can cancel anytime by going into your Settings > Subscription. Restore purchases if you previously subscribed."
+        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
     
-    private let buyButton: UIButton = {
+    lazy var buyButton: UIButton = {
        let button = UIButton()
         button.setTitle("Subscribe", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
         button.layer.masksToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private let restoreButton: UIButton = {
+    lazy var restoreButton: UIButton = {
        let button = UIButton()
         button.setTitle("Restore Purchases", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 5)
         button.setTitleColor(.link, for: .normal)
         button.layer.cornerRadius = 8
         button.layer.masksToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -46,22 +49,22 @@ class PayWallViewController: UIViewController {
         super.viewDidLoad()
         title = "BloggingMe Premium"
         view.backgroundColor = .systemBackground
+        setupViews()
+        setUpCloseButton()
+        setUpButtons()
+        setConstraints()
+    }
+    
+    private func setupViews() {
         view.addSubview(header)
         view.addSubview(termsView)
         view.addSubview(buyButton)
         view.addSubview(restoreButton)
         view.addSubview(heroView)
-        setUpCloseButton()
-        setUpButtons()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        header.frame = CGRect(x: 0, y: view.safeAreaInsets.top, width: view.width, height: view.height/3.2)
-        termsView.frame = CGRect(x: 10, y: view.height - 100, width: view.width - 20, height: 100)
-        restoreButton.frame = CGRect(x: 25, y: termsView.top-70, width: view.width - 50, height: 50)
-        buyButton.frame = CGRect(x: 25, y: restoreButton.top-60, width: view.width - 50, height: 50)
-        heroView.frame = CGRect(x: 0, y: header.bottom, width: view.width, height: buyButton.top - view.safeAreaInsets.top - header.height)
+        
+        termsView.font = .systemFont(ofSize: view.frame.width/27)
+        restoreButton.titleLabel?.font = .systemFont(ofSize: view.frame.width/20)
+        buyButton.titleLabel?.font = .systemFont(ofSize: view.frame.width/20)
     }
     
     private func setUpButtons() {
@@ -83,5 +86,35 @@ class PayWallViewController: UIViewController {
     
     @objc private func didTapClose() {
         dismiss(animated: true)
+    }
+}
+
+// MARK: - Constraints
+extension PayWallViewController {
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            header.topAnchor.constraint(equalTo: view.topAnchor),
+            header.widthAnchor.constraint(equalTo: view.widthAnchor),
+            header.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.23),
+
+            heroView.topAnchor.constraint(equalTo: header.bottomAnchor),
+            heroView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            heroView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45),
+            
+            buyButton.topAnchor.constraint(equalTo: heroView.bottomAnchor, constant: 10),
+            buyButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buyButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            buyButton.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.13),
+            
+            restoreButton.topAnchor.constraint(equalTo: buyButton.bottomAnchor, constant: view.frame.height/50),
+            restoreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            restoreButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            restoreButton.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.13),
+            
+            termsView.topAnchor.constraint(equalTo: restoreButton.bottomAnchor, constant: 10),
+            termsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            termsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            termsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
 }
