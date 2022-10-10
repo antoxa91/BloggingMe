@@ -9,7 +9,5 @@ pod 'FirebaseCore'
 pod 'FirebaseStorage'
 pod 'FirebaseFirestore'
 pod 'FirebaseAuth'
-pod 'Purchases'
-
 
 end

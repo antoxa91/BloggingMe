@@ -19,17 +19,14 @@
 		C58C308C28EEF2780099ACD7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C308B28EEF2780099ACD7 /* ProfileViewController.swift */; };
 		C58C308F28EEF2A60099ACD7 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C308E28EEF2A60099ACD7 /* TabBarController.swift */; };
 		C58C309128EEF2EE0099ACD7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309028EEF2EE0099ACD7 /* SignInViewController.swift */; };
-		C58C309328EEF3070099ACD7 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309228EEF3070099ACD7 /* SingUpViewController.swift */; };
+		C58C309328EEF3070099ACD7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309228EEF3070099ACD7 /* SignUpViewController.swift */; };
 		C58C309528EEF3180099ACD7 /* ViewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309428EEF3180099ACD7 /* ViewPostViewController.swift */; };
 		C58C309728EEF3380099ACD7 /* CreateNewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309628EEF3380099ACD7 /* CreateNewPostViewController.swift */; };
 		C58C309B28EEF3830099ACD7 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309A28EEF3830099ACD7 /* DatabaseManager.swift */; };
 		C58C309D28EEF3920099ACD7 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309C28EEF3920099ACD7 /* AuthManager.swift */; };
 		C58C309F28EEF3A90099ACD7 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309E28EEF3A90099ACD7 /* StorageManager.swift */; };
-		C595D4F328F03998009BC16E /* PayWallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C595D4F228F03998009BC16E /* PayWallViewController.swift */; };
-		C595D4F528F03A47009BC16E /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C595D4F428F03A47009BC16E /* IAPManager.swift */; };
-		C595D4F728F03BBD009BC16E /* PayWallHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C595D4F628F03BBD009BC16E /* PayWallHeaderView.swift */; };
 		C595D4F928F03EFC009BC16E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C595D4F828F03EFC009BC16E /* Extensions.swift */; };
-		C595D4FB28F04602009BC16E /* PayWallDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C595D4FA28F04602009BC16E /* PayWallDescriptionView.swift */; };
+		C5D0F97A28F43D0B0076B1C2 /* SignInHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0F97928F43D0B0076B1C2 /* SignInHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,18 +44,14 @@
 		C58C308B28EEF2780099ACD7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C58C308E28EEF2A60099ACD7 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C58C309028EEF2EE0099ACD7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		C58C309228EEF3070099ACD7 /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
+		C58C309228EEF3070099ACD7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C58C309428EEF3180099ACD7 /* ViewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPostViewController.swift; sourceTree = "<group>"; };
 		C58C309628EEF3380099ACD7 /* CreateNewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPostViewController.swift; sourceTree = "<group>"; };
 		C58C309A28EEF3830099ACD7 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		C58C309C28EEF3920099ACD7 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		C58C309E28EEF3A90099ACD7 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		C595D4F128F03829009BC16E /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
-		C595D4F228F03998009BC16E /* PayWallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWallViewController.swift; sourceTree = "<group>"; };
-		C595D4F428F03A47009BC16E /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
-		C595D4F628F03BBD009BC16E /* PayWallHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWallHeaderView.swift; sourceTree = "<group>"; };
 		C595D4F828F03EFC009BC16E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		C595D4FA28F04602009BC16E /* PayWallDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWallDescriptionView.swift; sourceTree = "<group>"; };
+		C5D0F97928F43D0B0076B1C2 /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
 		E0FACA7AF6F6AD27EAD84CDD /* Pods-BloggingMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloggingMe.release.xcconfig"; path = "Target Support Files/Pods-BloggingMe/Pods-BloggingMe.release.xcconfig"; sourceTree = "<group>"; };
 		E4FD7D5BB70A6B222E5677A1 /* Pods-BloggingMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloggingMe.debug.xcconfig"; path = "Target Support Files/Pods-BloggingMe/Pods-BloggingMe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,8 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				C58C307C28EEEC170099ACD7 /* LaunchScreen.storyboard */,
-				C595D4F628F03BBD009BC16E /* PayWallHeaderView.swift */,
-				C595D4FA28F04602009BC16E /* PayWallDescriptionView.swift */,
+				C5D0F97928F43D0B0076B1C2 /* SignInHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -146,7 +138,6 @@
 		C58C308828EEF1930099ACD7 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				C595D4F428F03A47009BC16E /* IAPManager.swift */,
 				C58C309A28EEF3830099ACD7 /* DatabaseManager.swift */,
 				C58C309C28EEF3920099ACD7 /* AuthManager.swift */,
 				C58C309E28EEF3A90099ACD7 /* StorageManager.swift */,
@@ -180,8 +171,6 @@
 				C58C308E28EEF2A60099ACD7 /* TabBarController.swift */,
 				C58C307528EEEC160099ACD7 /* HomeViewController.swift */,
 				C58C308B28EEF2780099ACD7 /* ProfileViewController.swift */,
-				C595D4F128F03829009BC16E /* Configuration.storekit */,
-				C595D4F228F03998009BC16E /* PayWallViewController.swift */,
 			);
 			path = "Main Tabs";
 			sourceTree = "<group>";
@@ -190,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				C58C309028EEF2EE0099ACD7 /* SignInViewController.swift */,
-				C58C309228EEF3070099ACD7 /* SingUpViewController.swift */,
+				C58C309228EEF3070099ACD7 /* SignUpViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -328,23 +317,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C595D4F528F03A47009BC16E /* IAPManager.swift in Sources */,
-				C595D4FB28F04602009BC16E /* PayWallDescriptionView.swift in Sources */,
 				C595D4F928F03EFC009BC16E /* Extensions.swift in Sources */,
 				C5478D3D28EF1687001D0A74 /* BlogPost.swift in Sources */,
 				C58C309528EEF3180099ACD7 /* ViewPostViewController.swift in Sources */,
 				C58C309D28EEF3920099ACD7 /* AuthManager.swift in Sources */,
 				C58C309B28EEF3830099ACD7 /* DatabaseManager.swift in Sources */,
-				C595D4F728F03BBD009BC16E /* PayWallHeaderView.swift in Sources */,
 				C58C307628EEEC160099ACD7 /* HomeViewController.swift in Sources */,
-				C58C309328EEF3070099ACD7 /* SingUpViewController.swift in Sources */,
+				C58C309328EEF3070099ACD7 /* SignUpViewController.swift in Sources */,
 				C58C307228EEEC160099ACD7 /* AppDelegate.swift in Sources */,
 				C5478D3B28EF1678001D0A74 /* User.swift in Sources */,
 				C58C309128EEF2EE0099ACD7 /* SignInViewController.swift in Sources */,
-				C595D4F328F03998009BC16E /* PayWallViewController.swift in Sources */,
 				C58C309728EEF3380099ACD7 /* CreateNewPostViewController.swift in Sources */,
 				C58C308C28EEF2780099ACD7 /* ProfileViewController.swift in Sources */,
 				C58C308F28EEF2A60099ACD7 /* TabBarController.swift in Sources */,
+				C5D0F97A28F43D0B0076B1C2 /* SignInHeaderView.swift in Sources */,
 				C58C307428EEEC160099ACD7 /* SceneDelegate.swift in Sources */,
 				C58C309F28EEF3A90099ACD7 /* StorageManager.swift in Sources */,
 			);
