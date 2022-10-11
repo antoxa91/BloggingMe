@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B7558B97CD44E2808A4398B1 /* Pods_BloggingMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A3766539B1699D78C97730 /* Pods_BloggingMe.framework */; };
-		C5478D3928EF10AB001D0A74 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5478D3828EF10AB001D0A74 /* GoogleService-Info.plist */; };
 		C5478D3B28EF1678001D0A74 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5478D3A28EF1678001D0A74 /* User.swift */; };
 		C5478D3D28EF1687001D0A74 /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5478D3C28EF1687001D0A74 /* BlogPost.swift */; };
 		C58C307228EEEC160099ACD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C307128EEEC160099ACD7 /* AppDelegate.swift */; };
@@ -31,7 +30,6 @@
 
 /* Begin PBXFileReference section */
 		03A3766539B1699D78C97730 /* Pods_BloggingMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BloggingMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5478D3828EF10AB001D0A74 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5478D3A28EF1678001D0A74 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C5478D3C28EF1687001D0A74 /* BlogPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
 		C58C306E28EEEC160099ACD7 /* BloggingMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloggingMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,7 +155,6 @@
 		C58C308A28EEF1F90099ACD7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				C5478D3828EF10AB001D0A74 /* GoogleService-Info.plist */,
 				C58C307A28EEEC170099ACD7 /* Assets.xcassets */,
 				C58C307F28EEEC170099ACD7 /* Info.plist */,
 				C595D4F828F03EFC009BC16E /* Extensions.swift */,
@@ -264,7 +261,6 @@
 			files = (
 				C58C307E28EEEC170099ACD7 /* LaunchScreen.storyboard in Resources */,
 				C58C307B28EEEC170099ACD7 /* Assets.xcassets in Resources */,
-				C5478D3928EF10AB001D0A74 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
