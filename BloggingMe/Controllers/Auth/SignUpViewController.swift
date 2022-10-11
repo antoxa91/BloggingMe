@@ -30,7 +30,6 @@ class SignUpViewController: UIViewController {
         field.placeholder = "Email Address"
         field.backgroundColor = .secondarySystemBackground
         field.borderStyle = .roundedRect
-        field.clearButtonMode = .always
         field.layer.masksToBounds = true
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
@@ -46,7 +45,6 @@ class SignUpViewController: UIViewController {
         field.isSecureTextEntry = true
         field.backgroundColor = .secondarySystemBackground
         field.borderStyle = .roundedRect
-        field.clearButtonMode = .always
         field.layer.masksToBounds = true
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
@@ -68,7 +66,6 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         title = "Create Account"
         view.backgroundColor = .systemBackground
-        
         setupViews()
         setConstraints()
         
