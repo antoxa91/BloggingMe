@@ -10,9 +10,9 @@ import UIKit
 class SignUpViewController: UIViewController {
     
     private let headerView = SignInHeaderView()
-
+    
     private let nameField: UITextField = {
-       let field = UITextField()
+        let field = UITextField()
         field.placeholder = "Full Name"
         field.setupLeftImage(imageViewNamed: "person.fill")
         field.backgroundColor = .secondarySystemBackground
@@ -24,7 +24,7 @@ class SignUpViewController: UIViewController {
     }()
     
     private let emailField: UITextField = {
-       let field = UITextField()
+        let field = UITextField()
         field.keyboardType = .emailAddress
         field.setupLeftImage(imageViewNamed: "envelope.fill")
         field.placeholder = "Email Address"
@@ -36,9 +36,9 @@ class SignUpViewController: UIViewController {
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
-
+    
     private let passwordField: UITextField = {
-       let field = UITextField()
+        let field = UITextField()
         field.keyboardType = .emailAddress
         field.setupLeftImage(imageViewNamed: "key.fill")
         field.placeholder = "Password"
@@ -53,7 +53,7 @@ class SignUpViewController: UIViewController {
     }()
     
     private lazy var signUpButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.configuration = .filled()
         button.configuration?.title = "Create Account"
         button.configuration?.baseBackgroundColor = .systemGreen
@@ -86,23 +86,15 @@ class SignUpViewController: UIViewController {
               let name = nameField.text, !name.isEmpty else {
             return
         }
-        
         //create user
         AuthManager.shared.singUp(email: email, password: password) { [weak self] success in
             if success {
                 // update database
-                let newUser = User(name: name, email: email, profilePictureURL: nil)
-                DatabaseManager.shared.insert(user: newUser) { inserted in
-                    guard inserted else { return }
-                    
-                    UserDefaults.standard.set(email, forKey: "email")
-                    UserDefaults.standard.set(name, forKey: "name")
-                    
-                    DispatchQueue.main.async {
-                        let vc = TabBarController()
-                        vc.modalPresentationStyle = .fullScreen
-                        self?.present(vc, animated: true)
-                    }
+                AuthManager.shared.insertNewUser(name: name, email: email, profilePictureURL: nil)
+                DispatchQueue.main.async {
+                    let vc = TabBarController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc, animated: true)
                 }
             } else {
                 print("Failed to create account")
@@ -134,7 +126,7 @@ extension SignUpViewController {
             passwordField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             passwordField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             passwordField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-
+            
             signUpButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 10),
             signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),

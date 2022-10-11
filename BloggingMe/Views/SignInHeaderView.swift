@@ -10,14 +10,14 @@ import UIKit
 class SignInHeaderView: UIView {
     
     private let imageView: UIImageView = {
-       let imageView = UIImageView(image: UIImage(named: "logo"))
+        let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let label: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
         label.text = "Explore millions of articles!"

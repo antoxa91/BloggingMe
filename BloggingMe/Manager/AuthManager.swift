@@ -50,13 +50,11 @@ final class AuthManager {
                 completion(false)
                 return
             }
-            
             completion(true)
         }
     }
     
     public func singInWithGoogle(signVC: SignInViewController, completion: @escaping (Bool) -> Void) {
-        
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
         
@@ -70,7 +68,7 @@ final class AuthManager {
                   error == nil else {
                 return
             }
-                        
+            
             let credential = GoogleAuthProvider.credential(
                 withIDToken: idToken,
                 accessToken: authentication.accessToken)
@@ -82,13 +80,17 @@ final class AuthManager {
                 }
                 completion(true)
                 //добавляем в Firestore Database
-                let newUser = User(name: name, email: email, profilePictureURL: nil)
-                DatabaseManager.shared.insert(user: newUser) { inserted in
-                    guard inserted else { return }
-                    UserDefaults.standard.set(email, forKey: "email")
-                    UserDefaults.standard.set(name, forKey: "name")
-                }
+                self?.insertNewUser(name: name, email: email, profilePictureURL: nil)
             }
+        }
+    }
+    
+    public func insertNewUser(name: String, email: String, profilePictureURL: URL?) {
+        let newUser = User(name: name, email: email, profilePictureURL: nil)
+        DatabaseManager.shared.insert(user: newUser) { inserted in
+            guard inserted else { return }
+            UserDefaults.standard.set(email, forKey: "email")
+            UserDefaults.standard.set(name, forKey: "name")
         }
     }
     
@@ -101,6 +103,5 @@ final class AuthManager {
             print(error)
             completion(false)
         }
-
     }
 }

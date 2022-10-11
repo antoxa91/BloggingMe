@@ -9,9 +9,9 @@ import UIKit
 class SignInViewController: UIViewController {
     
     private let headerView = SignInHeaderView()
-
+    
     private let emailField: UITextField = {
-       let field = UITextField()
+        let field = UITextField()
         field.keyboardType = .emailAddress
         field.setupLeftImage(imageViewNamed: "envelope.fill")
         field.placeholder = "Email Address"
@@ -23,9 +23,9 @@ class SignInViewController: UIViewController {
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
-
+    
     private let passwordField: UITextField = {
-       let field = UITextField()
+        let field = UITextField()
         field.keyboardType = .emailAddress
         field.setupLeftImage(imageViewNamed: "key.fill")
         field.placeholder = "Password"
@@ -40,7 +40,7 @@ class SignInViewController: UIViewController {
     }()
     
     private lazy var signInButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.configuration = .filled()
         button.configuration?.title = "Sign in with Email"
@@ -48,7 +48,7 @@ class SignInViewController: UIViewController {
     }()
     
     private lazy var signInWithGoogle: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.configuration = .gray()
         button.configuration?.image = UIImage(named: "google-logo")
         button.configuration?.imagePlacement = .all
@@ -58,15 +58,15 @@ class SignInViewController: UIViewController {
     
     private lazy var singInWithApple: UIButton = {
         let button = UIButton()
-         button.configuration = .gray()
-         button.configuration?.image = UIImage(named: "apple-logo")
-         button.configuration?.imagePlacement = .all
-         button.translatesAutoresizingMaskIntoConstraints = false
-         return button
+        button.configuration = .gray()
+        button.configuration?.image = UIImage(named: "apple-logo")
+        button.configuration?.imagePlacement = .all
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
-
+    
     private lazy var createAccountButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("Create Account", for: .normal)
         button.configuration = .plain()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +77,7 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         title = "Sign In"
         view.backgroundColor = .systemBackground
-
+        
         setupViews()
         setConstraints()
         setButtonTargets()
@@ -102,8 +102,7 @@ class SignInViewController: UIViewController {
     
     
     @objc private func didTapSignIn() {
-        
-        ///Todo - проработать 
+        ///Todo - проработать
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
             return
@@ -113,15 +112,12 @@ class SignInViewController: UIViewController {
         signInButton.configuration?.title = ""
         
         AuthManager.shared.singIn(email: email, password: password) { [weak self] success in
-            
             guard success else { return }
-                        
             self?.signInSuccess()
             self?.signInButton.configuration?.showsActivityIndicator = false
             UserDefaults.standard.set(email, forKey: "email")
         }
     }
-    
     
     @objc private func didTapSignInWithGoogle() {
         AuthManager.shared.singInWithGoogle(signVC: self) { [weak self] success in
@@ -129,17 +125,17 @@ class SignInViewController: UIViewController {
             self?.signInSuccess()
         }
     }
-        
+    
     @objc private func didTapSignInWithApple() {
-//        let provider = ASAuthorizationAppleIDProvider()
-//        let request = provider.createRequest()
-//        request.requestedScopes = [.fullName, .email]
-//
-//        let controller = ASAuthorizationController(authorizationRequests: [request])
-//
-//        controller.delegate = self
-//        controller.presentationContextProvider = self
-//        controller.performRequests()
+        //        let provider = ASAuthorizationAppleIDProvider()
+        //        let request = provider.createRequest()
+        //        request.requestedScopes = [.fullName, .email]
+        //
+        //        let controller = ASAuthorizationController(authorizationRequests: [request])
+        //
+        //        controller.delegate = self
+        //        controller.presentationContextProvider = self
+        //        controller.performRequests()
     }
     
     private func signInSuccess() {
@@ -204,12 +200,12 @@ extension SignInViewController {
             passwordField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             passwordField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             passwordField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-
+            
             signInButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 10),
             signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             signInButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-
+            
             signInWithGoogle.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 10),
             signInWithGoogle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             signInWithGoogle.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.46),
