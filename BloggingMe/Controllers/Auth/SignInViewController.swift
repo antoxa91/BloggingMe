@@ -36,6 +36,8 @@ class SignInViewController: UIViewController {
         field.borderStyle = .roundedRect
         field.clearButtonMode = .always
         field.layer.masksToBounds = true
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
@@ -77,8 +79,30 @@ class SignInViewController: UIViewController {
     }
     
     @objc private func didTapSignIn() {
+        
+        ///Todo - проработать 
+        guard let email = emailField.text, !email.isEmpty,
+              let password = passwordField.text, !password.isEmpty else {
+            return
+        }
+        
         signInButton.configuration?.showsActivityIndicator = true
         signInButton.configuration?.title = ""
+        
+        AuthManager.shared.singIn(email: email, password: password) { [weak self] success in
+            
+            guard success else { return }
+            
+            
+            
+            DispatchQueue.main.async {
+                UserDefaults.standard.set(email, forKey: "email")
+                let vc = TabBarController()
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: true)
+                self?.signInButton.configuration?.showsActivityIndicator = false
+            }
+        }
     }
     
     @objc private func didTapCreateAccount() {

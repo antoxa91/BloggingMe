@@ -48,6 +48,8 @@ class SignUpViewController: UIViewController {
         field.borderStyle = .roundedRect
         field.clearButtonMode = .always
         field.layer.masksToBounds = true
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
@@ -82,7 +84,33 @@ class SignUpViewController: UIViewController {
     }
     
     @objc private func didTapSignUp() {
+        guard let email = emailField.text, !email.isEmpty,
+              let password = passwordField.text, !password.isEmpty,
+              let name = nameField.text, !name.isEmpty else {
+            return
+        }
         
+        //create user
+        AuthManager.shared.singUp(email: email, password: password) { [weak self] success in
+            if success {
+                // update database
+                let newUser = User(name: name, email: email, profilePictureURL: nil)
+                DatabaseManager.shared.insert(user: newUser) { inserted in
+                    guard inserted else { return }
+                    
+                    UserDefaults.standard.set(email, forKey: "email")
+                    UserDefaults.standard.set(name, forKey: "name")
+                    
+                    DispatchQueue.main.async {
+                        let vc = TabBarController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc, animated: true)
+                    }
+                }
+            } else {
+                print("Failed to create account")
+            }
+        }
     }
 }
 
