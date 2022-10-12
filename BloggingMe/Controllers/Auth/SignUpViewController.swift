@@ -14,11 +14,10 @@ class SignUpViewController: UIViewController {
     private let nameField: UITextField = {
         let field = UITextField()
         field.placeholder = "Full Name"
-        field.setupLeftImage(imageViewNamed: "person.fill")
+        field.setupLeftImage(imageViewNamed: "person")
         field.backgroundColor = .secondarySystemBackground
         field.borderStyle = .roundedRect
         field.clearButtonMode = .always
-        field.layer.masksToBounds = true
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
@@ -26,26 +25,36 @@ class SignUpViewController: UIViewController {
     private let emailField: UITextField = {
         let field = UITextField()
         field.keyboardType = .emailAddress
-        field.setupLeftImage(imageViewNamed: "envelope.fill")
+        field.setupLeftImage(imageViewNamed: "envelope")
         field.placeholder = "Email Address"
         field.backgroundColor = .secondarySystemBackground
         field.borderStyle = .roundedRect
-        field.layer.masksToBounds = true
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
     
-    private let passwordField: UITextField = {
+    private let createPasswordField: UITextField = {
         let field = UITextField()
-        field.keyboardType = .emailAddress
-        field.setupLeftImage(imageViewNamed: "key.fill")
-        field.placeholder = "Password"
+        field.setupLeftImage(imageViewNamed: "key")
+        field.placeholder = "Create Password"
         field.isSecureTextEntry = true
         field.backgroundColor = .secondarySystemBackground
         field.borderStyle = .roundedRect
-        field.layer.masksToBounds = true
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.translatesAutoresizingMaskIntoConstraints = false
+        return field
+    }()
+    
+    private let returnPasswordField: UITextField = {
+        let field = UITextField()
+        field.setupLeftImage(imageViewNamed: "key")
+        field.placeholder = "Confirm Password"
+        field.isSecureTextEntry = true
+        field.backgroundColor = .secondarySystemBackground
+        field.borderStyle = .roundedRect
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +71,8 @@ class SignUpViewController: UIViewController {
         return button
     }()
     
+    var stackView = UIStackView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Create Account"
@@ -74,16 +85,19 @@ class SignUpViewController: UIViewController {
     
     private func setupViews() {
         view.addSubview(headerView)
-        view.addSubview(nameField)
-        view.addSubview(emailField)
-        view.addSubview(passwordField)
-        view.addSubview(signUpButton)
+        stackView = UIStackView(arrangedSubviews: [nameField, emailField, createPasswordField, returnPasswordField, signUpButton])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = view.height * 0.01
+        view.addSubview(stackView)
     }
     
     @objc private func didTapSignUp() {
         guard let email = emailField.text, !email.isEmpty,
-              let password = passwordField.text, !password.isEmpty,
+              let password = createPasswordField.text, !password.isEmpty, createPasswordField.text == returnPasswordField.text,
               let name = nameField.text, !name.isEmpty else {
+            signUpButton.animateError()
             return
         }
         //create user
@@ -112,25 +126,10 @@ extension SignUpViewController {
             headerView.widthAnchor.constraint(equalTo: view.widthAnchor),
             headerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
             
-            nameField.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            nameField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            nameField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            nameField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-            
-            emailField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 10),
-            emailField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            emailField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            emailField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-            
-            passwordField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 10),
-            passwordField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            passwordField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            passwordField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-            
-            signUpButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 10),
-            signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            signUpButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06)
+            stackView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            stackView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.56),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
     }
 }

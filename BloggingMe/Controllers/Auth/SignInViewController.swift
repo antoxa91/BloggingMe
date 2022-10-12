@@ -17,7 +17,6 @@ class SignInViewController: UIViewController {
         field.placeholder = "Email Address"
         field.backgroundColor = .secondarySystemBackground
         field.borderStyle = .roundedRect
-        field.layer.masksToBounds = true
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.translatesAutoresizingMaskIntoConstraints = false
@@ -26,13 +25,12 @@ class SignInViewController: UIViewController {
     
     private let passwordField: UITextField = {
         let field = UITextField()
-        field.keyboardType = .emailAddress
         field.setupLeftImage(imageViewNamed: "key.fill")
+        field.enablePasswordToggle()
         field.placeholder = "Password"
         field.isSecureTextEntry = true
         field.backgroundColor = .secondarySystemBackground
         field.borderStyle = .roundedRect
-        field.layer.masksToBounds = true
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.translatesAutoresizingMaskIntoConstraints = false
@@ -51,16 +49,9 @@ class SignInViewController: UIViewController {
         let button = UIButton()
         button.configuration = .gray()
         button.configuration?.image = UIImage(named: "google-logo")
-        button.configuration?.imagePlacement = .all
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private lazy var singInWithApple: UIButton = {
-        let button = UIButton()
-        button.configuration = .gray()
-        button.configuration?.image = UIImage(named: "apple-logo")
-        button.configuration?.imagePlacement = .all
+        button.configuration?.imagePlacement = .leading
+        button.configuration?.imagePadding = 15
+        button.configuration?.title = "Sign in with Google"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -72,6 +63,8 @@ class SignInViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    var stackView = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,18 +78,18 @@ class SignInViewController: UIViewController {
     
     private func setupViews() {
         view.addSubview(headerView)
-        view.addSubview(emailField)
-        view.addSubview(passwordField)
-        view.addSubview(signInButton)
-        view.addSubview(signInWithGoogle)
-        view.addSubview(singInWithApple)
+        stackView = UIStackView(arrangedSubviews: [emailField, passwordField, signInButton, signInWithGoogle])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = view.height * 0.01
+        view.addSubview(stackView)
         view.addSubview(createAccountButton)
     }
     
     private func setButtonTargets() {
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
         signInWithGoogle.addTarget(self, action: #selector(didTapSignInWithGoogle), for: .touchUpInside)
-        singInWithApple.addTarget(self, action: #selector(didTapSignInWithApple), for: .touchUpInside)
         createAccountButton.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside)
     }
     
@@ -105,37 +98,28 @@ class SignInViewController: UIViewController {
         ///Todo - проработать
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
+            signInButton.animateError()
             return
         }
         
-        signInButton.configuration?.showsActivityIndicator = true
-        signInButton.configuration?.title = ""
         
         AuthManager.shared.singIn(email: email, password: password) { [weak self] success in
+            self?.signInButton.configuration?.showsActivityIndicator = true
+            self?.signInButton.configuration?.title = ""
             guard success else { return }
             self?.signInSuccess()
-            self?.signInButton.configuration?.showsActivityIndicator = false
             UserDefaults.standard.set(email, forKey: "email")
         }
     }
     
     @objc private func didTapSignInWithGoogle() {
         AuthManager.shared.singInWithGoogle(signVC: self) { [weak self] success in
+            self?.signInWithGoogle.configuration?.showsActivityIndicator = true
+            self?.signInWithGoogle.configuration?.title = ""
+
             guard success else { return }
             self?.signInSuccess()
         }
-    }
-    
-    @objc private func didTapSignInWithApple() {
-        //        let provider = ASAuthorizationAppleIDProvider()
-        //        let request = provider.createRequest()
-        //        request.requestedScopes = [.fullName, .email]
-        //
-        //        let controller = ASAuthorizationController(authorizationRequests: [request])
-        //
-        //        controller.delegate = self
-        //        controller.presentationContextProvider = self
-        //        controller.performRequests()
     }
     
     private func signInSuccess() {
@@ -154,34 +138,6 @@ class SignInViewController: UIViewController {
     }
 }
 
-//
-//// MARK: - ASAuthorizationControllerDelegate
-//extension SignInViewController: ASAuthorizationControllerDelegate {
-//    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-//        print("failed")
-//    }
-//
-//    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-//        switch authorization.credential {
-//        case let credentials as ASAuthorizationAppleIDCredential:
-//            let firstName = credentials.fullName?.givenName
-//            let lastName = credentials.fullName?.familyName
-//            let email = credentials.email
-//            break
-//
-//        default:
-//            break
-//        }
-//    }
-//}
-//
-//// MARK: - ASAuthorizationControllerPresentationContextProviding
-//extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
-//    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-//        return view.window!
-//    }
-//}
-
 
 // MARK: - Constraints
 extension SignInViewController {
@@ -191,32 +147,12 @@ extension SignInViewController {
             headerView.widthAnchor.constraint(equalTo: view.widthAnchor),
             headerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
             
-            emailField.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            emailField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            emailField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            emailField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
+            stackView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.27),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
-            passwordField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 10),
-            passwordField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            passwordField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            passwordField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-            
-            signInButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 10),
-            signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            signInButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-            
-            signInWithGoogle.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 10),
-            signInWithGoogle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            signInWithGoogle.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.46),
-            signInWithGoogle.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07),
-            
-            singInWithApple.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 10),
-            singInWithApple.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            singInWithApple.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.46),
-            singInWithApple.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07),
-            
-            createAccountButton.topAnchor.constraint(equalTo: singInWithApple.bottomAnchor, constant: view.height * 0.05),
+            createAccountButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: view.height * 0.05),
             createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             createAccountButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
