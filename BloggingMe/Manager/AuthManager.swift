@@ -86,7 +86,7 @@ final class AuthManager {
     }
     
     public func insertNewUser(name: String, email: String, profilePictureURL: URL?) {
-        let newUser = User(name: name, email: email, profilePictureURL: nil)
+        let newUser = User(name: name, email: email, profilePictureRef: nil)
         DatabaseManager.shared.insert(user: newUser) { inserted in
             guard inserted else { return }
             UserDefaults.standard.set(email, forKey: "email")
