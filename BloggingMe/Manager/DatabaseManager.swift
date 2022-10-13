@@ -16,7 +16,7 @@ final class DatabaseManager {
     
     private init() {}
     
-    public func insert(blogPost: BlogPost, user: User, completion: @escaping(Bool) -> Void) {
+    public func insertPost(blogPost: BlogPost, user: User, completion: @escaping(Bool) -> Void) {
         
     }
     
@@ -28,7 +28,7 @@ final class DatabaseManager {
         
     }
     
-    public func insert(user: User, completion: @escaping(Bool) -> Void) {
+    public func insertUser(_ user: User, completion: @escaping(Bool) -> Void) {
         let documentID = user.email
             .replacingOccurrences(of: ".", with: "_")
             .replacingOccurrences(of: "@", with: "_")
@@ -43,5 +43,48 @@ final class DatabaseManager {
             .setData(data) { error in
                 completion(error == nil)
             }
+    }
+    
+    public func getUser(email: String, completion: @escaping (User?) -> Void) {
+        let documentID = email
+            .replacingOccurrences(of: ".", with: "_")
+            .replacingOccurrences(of: "@", with: "_")
+        
+        database
+            .collection("users")
+            .document(documentID)
+            .getDocument { snapshot, error in
+                guard let data = snapshot?.data() as? [String: String],
+                      let name = data["name"],
+                      error == nil else {
+                    return
+                }
+                
+                var ref = data["profile_photo"]
+                
+                let user = User(name: name, email: email, profilePictureRef: ref)
+                completion(user)
+            }
+    }
+    
+    public func updateProfilePhoto(email: String, completion: @escaping (Bool) -> Void) {
+        let path = email
+            .replacingOccurrences(of: "@", with: "_")
+            .replacingOccurrences(of: ".", with: "_")
+        
+        let photoReference = "profile_pictures/\(path)/photo.png"
+        
+        let databaseRef = database
+            .collection("users")
+            .document(path)
+        
+        databaseRef.getDocument { snapshot, error in
+            guard var data = snapshot?.data(), error == nil else { return }
+            
+            data["profile_photo"] = photoReference
+            databaseRef.setData(data) { error in
+                completion(error == nil)
+            }
+        }
     }
 }
