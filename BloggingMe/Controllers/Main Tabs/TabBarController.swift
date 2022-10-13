@@ -15,12 +15,14 @@ class TabBarController: UITabBarController {
     }
     
     private func setupControllers() {
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "email") else { return }
+        
         let home = HomeViewController()
         home.title = "Home"
         home.navigationItem.largeTitleDisplayMode = .always
         
-        let profile = ProfileViewController()
-        profile.title = "Title"
+        let profile = ProfileViewController(currentEmail: currentUserEmail)
+        profile.title = "Profile"
         profile.navigationItem.largeTitleDisplayMode = .always
         
         let nav1 = UINavigationController(rootViewController: home)
