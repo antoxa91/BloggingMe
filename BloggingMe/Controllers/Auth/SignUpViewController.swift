@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+final class SignUpViewController: UIViewController {
     
     private let headerView = SignInHeaderView()
     
@@ -48,7 +48,7 @@ class SignUpViewController: UIViewController {
         return field
     }()
     
-    private let returnPasswordField: UITextField = {
+    private let confirmPasswordField: UITextField = {
         let field = UITextField()
         field.setupLeftImage(imageViewNamed: "key")
         field.placeholder = "Confirm Password"
@@ -72,20 +72,19 @@ class SignUpViewController: UIViewController {
     }()
     
     var stackView = UIStackView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Create Account"
         view.backgroundColor = .systemBackground
         setupViews()
         setConstraints()
-        
         signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
     }
     
     private func setupViews() {
         view.addSubview(headerView)
-        stackView = UIStackView(arrangedSubviews: [nameField, emailField, createPasswordField, returnPasswordField, signUpButton])
+        stackView = UIStackView(arrangedSubviews: [nameField, emailField, createPasswordField, confirmPasswordField, signUpButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -95,7 +94,7 @@ class SignUpViewController: UIViewController {
     
     @objc private func didTapSignUp() {
         guard let email = emailField.text, !email.isEmpty,
-              let password = createPasswordField.text, !password.isEmpty, createPasswordField.text == returnPasswordField.text,
+              let password = createPasswordField.text, !password.isEmpty, createPasswordField.text == confirmPasswordField.text,
               let name = nameField.text, !name.isEmpty else {
             signUpButton.animateError()
             return
@@ -103,15 +102,26 @@ class SignUpViewController: UIViewController {
         //create user
         AuthManager.shared.singUp(email: email, password: password) { [weak self] success in
             if success {
-                // update database
-                AuthManager.shared.insertNewUser(name: name, email: email, profilePictureURL: nil)
-                DispatchQueue.main.async {
-                    let vc = TabBarController()
-                    vc.modalPresentationStyle = .fullScreen
-                    self?.present(vc, animated: true)
+                // Update database
+                let newUser = User(name: name, email: email, profilePictureRef: nil)
+                DatabaseManager.shared.insertUser(newUser) { inserted in
+                    guard inserted else {
+                        return
+                    }
+                    
+                    UserDefaults.standard.set(email, forKey: "email")
+                    UserDefaults.standard.set(name, forKey: "name")
+                    
+                    DispatchQueue.main.async {
+                        let vc = TabBarController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc, animated: true)
+                    }
                 }
             } else {
-                print("Failed to create account")
+                let ac = UIAlertController(title: "Failed to create account", message: "Try again", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .destructive))
+                self?.present(ac, animated: true)
             }
         }
     }
