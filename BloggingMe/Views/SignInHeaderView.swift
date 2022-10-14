@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignInHeaderView: UIView {
+final class SignInHeaderView: UIView {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
