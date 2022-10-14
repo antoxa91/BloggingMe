@@ -9,6 +9,5 @@ pod 'FirebaseCore'
 pod 'FirebaseStorage'
 pod 'FirebaseFirestore'
 pod 'FirebaseAuth'
-pod 'GoogleSignIn'
 
 end
