@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController {
     
     private let headerView = SignInHeaderView()
     
@@ -45,17 +45,6 @@ class SignInViewController: UIViewController {
         return button
     }()
     
-    private lazy var signInWithGoogle: UIButton = {
-        let button = UIButton()
-        button.configuration = .gray()
-        button.configuration?.image = UIImage(named: "google-logo")
-        button.configuration?.imagePlacement = .leading
-        button.configuration?.imagePadding = 15
-        button.configuration?.title = "Sign in with Google"
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     private lazy var createAccountButton: UIButton = {
         let button = UIButton()
         button.setTitle("Create Account", for: .normal)
@@ -70,7 +59,6 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         title = "Sign In"
         view.backgroundColor = .systemBackground
-        
         setupViews()
         setConstraints()
         setButtonTargets()
@@ -78,7 +66,7 @@ class SignInViewController: UIViewController {
     
     private func setupViews() {
         view.addSubview(headerView)
-        stackView = UIStackView(arrangedSubviews: [emailField, passwordField, signInButton, signInWithGoogle])
+        stackView = UIStackView(arrangedSubviews: [emailField, passwordField, signInButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -89,7 +77,6 @@ class SignInViewController: UIViewController {
     
     private func setButtonTargets() {
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
-        signInWithGoogle.addTarget(self, action: #selector(didTapSignInWithGoogle), for: .touchUpInside)
         createAccountButton.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside)
     }
     
@@ -102,31 +89,17 @@ class SignInViewController: UIViewController {
             return
         }
         
-        
         AuthManager.shared.singIn(email: email, password: password) { [weak self] success in
             self?.signInButton.configuration?.showsActivityIndicator = true
             self?.signInButton.configuration?.title = ""
             guard success else { return }
-            self?.signInSuccess()
+            
+            DispatchQueue.main.async {
+                let vc = TabBarController()
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: true)
+            }
             UserDefaults.standard.set(email, forKey: "email")
-        }
-    }
-    
-    @objc private func didTapSignInWithGoogle() {
-        AuthManager.shared.singInWithGoogle(signVC: self) { [weak self] success in
-            self?.signInWithGoogle.configuration?.showsActivityIndicator = true
-            self?.signInWithGoogle.configuration?.title = ""
-
-            guard success else { return }
-            self?.signInSuccess()
-        }
-    }
-    
-    private func signInSuccess() {
-        DispatchQueue.main.async {
-            let vc = TabBarController()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
         }
     }
     
@@ -148,7 +121,7 @@ extension SignInViewController {
             headerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
             
             stackView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.27),
+            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.22),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
