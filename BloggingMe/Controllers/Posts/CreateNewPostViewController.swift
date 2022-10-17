@@ -61,7 +61,6 @@ final class CreateNewPostViewController: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         textView.font = .systemFont(ofSize: view.width/15)
     }
     
@@ -94,7 +93,6 @@ final class CreateNewPostViewController: UITabBarController {
             return
         }
         
-        print("Starting post ...") ///почему то дохера шлепает постов
         let newPostId = UUID().uuidString
         
         StorageManager.shared.uploadBlogHeaderImage(email: email, image: headerImage, postId: newPostId) { success in
