@@ -41,11 +41,33 @@ final class StorageManager {
             }
     }
     
-    public func uploadHeaderImage(blogPost: BlogPost, image: UIImage?, completion: @escaping (Bool) -> Void) {
+    public func uploadBlogHeaderImage(email: String, image: UIImage?, postId: String, completion: @escaping (Bool) -> Void) {
+        let path = email
+            .replacingOccurrences(of: "@", with: "_")
+            .replacingOccurrences(of: ".", with: "_")
         
+        guard let jpegData = image?.jpegData(compressionQuality: 0.8) else { return }
+        
+        container
+            .reference(withPath: "post_headers/\(path)/\(postId).png")
+            .putData(jpegData) { metadata, error in
+                guard metadata != nil, error == nil else {
+                    completion(false)
+                    return
+                }
+                completion(true)
+            }
     }
     
-    public func downloadURLForPostHeader(blogPost: BlogPost, completion: @escaping (URL?) -> Void) {
+    public func downloadURLForPostHeader(email: String, postId: String, completion: @escaping (URL?) -> Void) {
+        let emailComponent = email
+            .replacingOccurrences(of: "@", with: "_")
+            .replacingOccurrences(of: ".", with: "_")
         
+        container
+            .reference(withPath: "post_headers/\(emailComponent)/\(postId).png")
+            .downloadURL { url, _ in
+                completion(url)
+            }
     }
 }
