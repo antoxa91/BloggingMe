@@ -37,6 +37,7 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(didTapSignOut))
         setupTable()
+        fetchPosts()
     }
     
     private func setupTable() {
@@ -90,7 +91,12 @@ extension ProfileViewController: UITableViewDelegate {
 extension ProfileViewController: UITableViewDataSource {
     
     private func fetchPosts(){
-        
+        DatabaseManager.shared.getPosts(for: currentEmail) {[weak self] posts in
+            self?.posts = posts
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,7 +106,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = posts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Blog does not exist"
+        cell.textLabel?.text = post.title
         return cell
     }
 }
@@ -188,11 +194,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension ProfileViewController {
     func setConstraints() {
         NSLayoutConstraint.activate([
-            myHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             myHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             myHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.30),
             
-            tableView.topAnchor.constraint(equalTo: myHeaderView.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
