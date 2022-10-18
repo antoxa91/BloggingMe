@@ -88,7 +88,7 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.width/4
+        return view.width/5
     }
 }
 
@@ -96,7 +96,7 @@ extension ProfileViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     private func fetchPosts(){
-        DatabaseManager.shared.getPosts(for: currentEmail) {[weak self] posts in
+        DatabaseManager.shared.getUserPosts(for: currentEmail) {[weak self] posts in
             self?.posts = posts
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
@@ -145,7 +145,7 @@ extension ProfileViewController {
     }
     
     @objc private func didTapProfilePhoto() {
-        //чтобы можно менять фото профиля только у себя
+        // чтобы менять фото профиля только у себя
         guard let myEmail = UserDefaults.standard.string(forKey: "email"),
               myEmail == currentEmail else { return }
         let picker = UIImagePickerController()
@@ -182,7 +182,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             image: image) { [weak self] success in
                 guard let strongSelf = self else { return }
                 if success {
-                    //update database
                     DatabaseManager.shared.updateProfilePhoto(email: strongSelf.currentEmail) { updated in
                         guard updated else { return }
                         DispatchQueue.main.async {
