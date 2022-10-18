@@ -20,7 +20,7 @@ final class DatabaseManager {
         let userEmail = email
             .replacingOccurrences(of: ".", with: "_")
             .replacingOccurrences(of: "@", with: "_")
-
+        
         let data: [String: Any] = [
             "id": blogPost.identifier,
             "title": blogPost.title,
@@ -28,7 +28,7 @@ final class DatabaseManager {
             "created": blogPost.timestamp,
             "headerImageURL": blogPost.headerImageUrl?.absoluteString ?? ""
         ]
-
+        
         database
             .collection("users")
             .document(userEmail)
@@ -40,10 +40,40 @@ final class DatabaseManager {
     }
     
     public func getAllPosts(completion: @escaping([BlogPost]) -> Void) {
- 
+        database
+            .collection("users")
+            .getDocuments { [weak self] snapshot, error in
+                guard let documents = snapshot?.documents.compactMap({ $0.data()}), error == nil else {
+                    return
+                }
+                
+                let emails: [String] = documents.compactMap { return $0["email"] as? String }
+                guard !emails.isEmpty else {
+                    completion([])
+                    return
+                }
+                
+                let group = DispatchGroup()
+                var result: [BlogPost] = []
+                
+                for email in emails {
+                    group.enter()
+                    self?.getUserPosts(for: email) { userPosts in
+                        defer {
+                            group.leave()
+                        }
+                        result.append(contentsOf: userPosts)
+                    }
+                }
+                
+                group.notify(queue: .global()) {
+                    print("Feed posts: \(result.count)")
+                    completion(result)
+                }
+            }
     }
     
-    public func getPosts(for email: String, completion: @escaping([BlogPost]) -> Void) {
+    public func getUserPosts(for email: String, completion: @escaping([BlogPost]) -> Void) {
         let userEmail = email
             .replacingOccurrences(of: ".", with: "_")
             .replacingOccurrences(of: "@", with: "_")
@@ -56,7 +86,7 @@ final class DatabaseManager {
                       error == nil else {
                     return
                 }
-
+                
                 let posts: [BlogPost] = documents.compactMap({ dictionary in
                     guard let id = dictionary["id"] as? String,
                           let title = dictionary["title"] as? String,
@@ -66,7 +96,7 @@ final class DatabaseManager {
                         print("Invalid post fetch conversion")
                         return nil
                     }
-
+                    
                     let post = BlogPost(
                         identifier: id,
                         title: title,
@@ -76,7 +106,7 @@ final class DatabaseManager {
                     )
                     return post
                 })
-
+                
                 completion(posts)
             }
     }
