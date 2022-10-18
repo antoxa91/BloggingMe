@@ -1,38 +1,11 @@
 //
-//  Extensions.swift
+//  Extensions UIButton + UITextField.swift
 //  BloggingMe
 //
 //  Created by Антон Стафеев on 07.10.2022.
 //
 
 import UIKit
-
-//TODO: - сверсать на констр и удалить это
-extension UIView {
-    var width: CGFloat {
-        frame.size.width
-    }
-    
-    var height: CGFloat {
-        frame.size.height
-    }
-    
-    var left: CGFloat {
-        frame.origin.x
-    }
-    
-    var right: CGFloat {
-        left + width
-    }
-    
-    var top: CGFloat {
-        frame.origin.y
-    }
-    
-    var bottom: CGFloat {
-        top + height
-    }
-}
 
 let button = UIButton(type: .custom)
 extension UITextField {
@@ -45,7 +18,6 @@ extension UITextField {
         rightViewMode = .always
         button.alpha = 0.5
     }
-    
     
     @objc func togglePasswordView(_ sender: Any) {
           isSecureTextEntry.toggle()
@@ -63,6 +35,7 @@ extension UITextField {
         self.tintColor = .lightGray
     }
 }
+
 
 extension UIButton {
     func animateError() {
