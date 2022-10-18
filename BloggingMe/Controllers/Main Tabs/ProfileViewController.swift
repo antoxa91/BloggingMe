@@ -14,7 +14,8 @@ final class ProfileViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(PostPreviewTableViewCell.self,
+                           forCellReuseIdentifier: PostPreviewTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -80,16 +81,20 @@ final class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = ViewPostViewController()
-        vc.title = posts[indexPath.row].title
+        let vc = ViewPostViewController(post: posts[indexPath.row])
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.title = "Post"
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.width/4
     }
 }
 
 
 // MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
-    
     private func fetchPosts(){
         DatabaseManager.shared.getPosts(for: currentEmail) {[weak self] posts in
             self?.posts = posts
@@ -105,8 +110,8 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = posts[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = post.title
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPreviewTableViewCell.identifier, for: indexPath) as? PostPreviewTableViewCell else { return UITableViewCell() }
+        cell.configure(with: .init(title: post.title, imageUrl: post.headerImageUrl))
         return cell
     }
 }
