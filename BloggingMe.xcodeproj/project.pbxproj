@@ -25,8 +25,12 @@
 		C58C309B28EEF3830099ACD7 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309A28EEF3830099ACD7 /* DatabaseManager.swift */; };
 		C58C309D28EEF3920099ACD7 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309C28EEF3920099ACD7 /* AuthManager.swift */; };
 		C58C309F28EEF3A90099ACD7 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C309E28EEF3A90099ACD7 /* StorageManager.swift */; };
-		C595D4F928F03EFC009BC16E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C595D4F828F03EFC009BC16E /* Extensions.swift */; };
+		C595D4F928F03EFC009BC16E /* Extensions UIButton + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C595D4F828F03EFC009BC16E /* Extensions UIButton + UITextField.swift */; };
 		C5D0F97A28F43D0B0076B1C2 /* SignInHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0F97928F43D0B0076B1C2 /* SignInHeaderView.swift */; };
+		C5DB5B8F28FE8C1E00334EC7 /* PostPreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DB5B8E28FE8C1E00334EC7 /* PostPreviewTableViewCell.swift */; };
+		C5DB5B9128FE8C6400334EC7 /* PostHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DB5B9028FE8C6400334EC7 /* PostHeaderTableViewCell.swift */; };
+		C5DB5B9328FE91CF00334EC7 /* PostPreviewTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DB5B9228FE91CF00334EC7 /* PostPreviewTableViewCellViewModel.swift */; };
+		C5DB5B9528FE9A0600334EC7 /* PostHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DB5B9428FE9A0600334EC7 /* PostHeaderTableViewCellViewModel.swift */; };
 		FF530B5F97E07979CCB7B967 /* Pods_BloggingMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61566EAC9C3B877E6A2FE522 /* Pods_BloggingMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,8 +58,12 @@
 		C58C309A28EEF3830099ACD7 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		C58C309C28EEF3920099ACD7 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		C58C309E28EEF3A90099ACD7 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		C595D4F828F03EFC009BC16E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C595D4F828F03EFC009BC16E /* Extensions UIButton + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions UIButton + UITextField.swift"; sourceTree = "<group>"; };
 		C5D0F97928F43D0B0076B1C2 /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
+		C5DB5B8E28FE8C1E00334EC7 /* PostPreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewTableViewCell.swift; sourceTree = "<group>"; };
+		C5DB5B9028FE8C6400334EC7 /* PostHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		C5DB5B9228FE91CF00334EC7 /* PostPreviewTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		C5DB5B9428FE9A0600334EC7 /* PostHeaderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +130,7 @@
 		C58C308628EEF17F0099ACD7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C5DB5B8D28FE8BDC00334EC7 /* Cells */,
 				C58C307C28EEEC170099ACD7 /* LaunchScreen.storyboard */,
 				C5D0F97928F43D0B0076B1C2 /* SignInHeaderView.swift */,
 				C525381D28F96F5200264261 /* ProfileHeaderView.swift */,
@@ -134,6 +143,8 @@
 			children = (
 				C5478D3A28EF1678001D0A74 /* User.swift */,
 				C5478D3C28EF1687001D0A74 /* BlogPost.swift */,
+				C5DB5B9228FE91CF00334EC7 /* PostPreviewTableViewCellViewModel.swift */,
+				C5DB5B9428FE9A0600334EC7 /* PostHeaderTableViewCellViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -163,7 +174,7 @@
 				C56CA84D28F548E9003EA427 /* GoogleService-Info.plist */,
 				C58C307A28EEEC170099ACD7 /* Assets.xcassets */,
 				C58C307F28EEEC170099ACD7 /* Info.plist */,
-				C595D4F828F03EFC009BC16E /* Extensions.swift */,
+				C595D4F828F03EFC009BC16E /* Extensions UIButton + UITextField.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -194,6 +205,15 @@
 				C58C309628EEF3380099ACD7 /* CreateNewPostViewController.swift */,
 			);
 			path = Posts;
+			sourceTree = "<group>";
+		};
+		C5DB5B8D28FE8BDC00334EC7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C5DB5B8E28FE8C1E00334EC7 /* PostPreviewTableViewCell.swift */,
+				C5DB5B9028FE8C6400334EC7 /* PostHeaderTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		E94658B8E8A468782A12BABE /* Pods */ = {
@@ -320,13 +340,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C595D4F928F03EFC009BC16E /* Extensions.swift in Sources */,
+				C595D4F928F03EFC009BC16E /* Extensions UIButton + UITextField.swift in Sources */,
 				C5478D3D28EF1687001D0A74 /* BlogPost.swift in Sources */,
 				C58C309528EEF3180099ACD7 /* ViewPostViewController.swift in Sources */,
 				C58C309D28EEF3920099ACD7 /* AuthManager.swift in Sources */,
 				C525381E28F96F5200264261 /* ProfileHeaderView.swift in Sources */,
 				C58C309B28EEF3830099ACD7 /* DatabaseManager.swift in Sources */,
+				C5DB5B8F28FE8C1E00334EC7 /* PostPreviewTableViewCell.swift in Sources */,
+				C5DB5B9128FE8C6400334EC7 /* PostHeaderTableViewCell.swift in Sources */,
 				C58C307628EEEC160099ACD7 /* HomeViewController.swift in Sources */,
+				C5DB5B9328FE91CF00334EC7 /* PostPreviewTableViewCellViewModel.swift in Sources */,
 				C58C309328EEF3070099ACD7 /* SignUpViewController.swift in Sources */,
 				C58C307228EEEC160099ACD7 /* AppDelegate.swift in Sources */,
 				C5478D3B28EF1678001D0A74 /* User.swift in Sources */,
@@ -337,6 +360,7 @@
 				C5D0F97A28F43D0B0076B1C2 /* SignInHeaderView.swift in Sources */,
 				C58C307428EEEC160099ACD7 /* SceneDelegate.swift in Sources */,
 				C58C309F28EEF3A90099ACD7 /* StorageManager.swift in Sources */,
+				C5DB5B9528FE9A0600334EC7 /* PostHeaderTableViewCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

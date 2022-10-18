@@ -58,7 +58,8 @@ extension ViewPostViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.selectionStyle = .none
             cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.font = .systemFont(ofSize: view.width/20, weight: .bold)
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.font = .systemFont(ofSize: view.frame.size.width/20, weight: .bold)
             cell.textLabel?.text = post.title
             return cell
         case 1:
@@ -83,7 +84,7 @@ extension ViewPostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 1:
-            return view.width * 0.8
+            return view.frame.size.width * 0.9
         default:
             return UITableView.automaticDimension
         }

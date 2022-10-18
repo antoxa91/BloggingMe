@@ -50,7 +50,6 @@ final class ProfileViewController: UIViewController {
         setConstraints()
     }
     
-    ///Sign Out
     @objc private func didTapSignOut() {
         let ac = UIAlertController(title: "Sign Out", message: "Are you sure you'd like to sign out?", preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -88,7 +87,7 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.width/5
+        return view.frame.size.width/5
     }
 }
 

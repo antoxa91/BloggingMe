@@ -70,7 +70,7 @@ final class SignInViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = view.height * 0.01
+        stackView.spacing = view.frame.size.height * 0.01
         view.addSubview(stackView)
         view.addSubview(createAccountButton)
     }
@@ -125,7 +125,7 @@ extension SignInViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
-            createAccountButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: view.height * 0.05),
+            createAccountButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: view.frame.size.height * 0.05),
             createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             createAccountButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),

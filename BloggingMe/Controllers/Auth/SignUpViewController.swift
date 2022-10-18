@@ -88,7 +88,7 @@ final class SignUpViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = view.height * 0.01
+        stackView.spacing = view.frame.size.height * 0.01
         view.addSubview(stackView)
     }
     

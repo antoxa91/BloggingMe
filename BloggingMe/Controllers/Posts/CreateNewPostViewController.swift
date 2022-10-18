@@ -62,7 +62,7 @@ final class CreateNewPostViewController: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        textView.font = .systemFont(ofSize: view.width/15)
+        textView.font = .systemFont(ofSize: view.frame.size.width/15)
     }
     
     @objc private func didTapHeader() {
@@ -106,7 +106,6 @@ final class CreateNewPostViewController: UITabBarController {
                     return
                 }
                 
-                //insert of post into Database
                 let post = BlogPost(identifier: newPostId, title: title, timestamp: Date().timeIntervalSince1970, headerImageUrl: headerURL, text: body)
                 
                 DatabaseManager.shared.insertPost(blogPost: post, email: email) { [weak self] posted in

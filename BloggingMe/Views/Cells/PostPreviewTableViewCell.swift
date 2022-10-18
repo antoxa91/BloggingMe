@@ -40,7 +40,7 @@ final class PostPreviewTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        postTitleLabel.font = .systemFont(ofSize: width/20, weight: .medium)
+        postTitleLabel.font = .systemFont(ofSize: frame.size.width/20, weight: .medium)
         setConstraints()
     }
     
