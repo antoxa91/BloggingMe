@@ -16,6 +16,7 @@ final class CreateNewPostViewController: UITabBarController {
         field.borderStyle = .roundedRect
         field.autocapitalizationType = .words
         field.autocorrectionType = .yes
+        field.textAlignment = .center
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
