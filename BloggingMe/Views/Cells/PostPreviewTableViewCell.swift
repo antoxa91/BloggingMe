@@ -73,7 +73,7 @@ final class PostPreviewTableViewCell: UITableViewCell {
             postImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             postImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             postImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9),
-            postImageView.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9),
+            postImageView.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 1.1),
             
             postTitleLabel.leadingAnchor.constraint(equalTo: postImageView.trailingAnchor, constant: 10),
             postTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
