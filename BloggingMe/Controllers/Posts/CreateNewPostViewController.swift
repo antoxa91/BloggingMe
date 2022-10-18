@@ -22,7 +22,7 @@ final class CreateNewPostViewController: UITabBarController {
     
     private let headerImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(systemName: "photo")
         imageView.backgroundColor = .tertiarySystemBackground
@@ -66,6 +66,7 @@ final class CreateNewPostViewController: UITabBarController {
     
     @objc private func didTapHeader() {
         let picker = UIImagePickerController()
+        picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true)
     }
@@ -127,7 +128,7 @@ extension CreateNewPostViewController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
-        guard let image = info[.originalImage] as? UIImage else { return }
+        guard let image = info[.editedImage] as? UIImage else { return }
         
         selectedHeaderImage = image
         headerImageView.image = image
@@ -146,7 +147,8 @@ extension CreateNewPostViewController {
             
             headerImageView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: 10),
             headerImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            headerImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+            headerImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+
             
             textView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 10),
             textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
