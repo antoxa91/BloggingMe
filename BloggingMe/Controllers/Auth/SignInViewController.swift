@@ -89,6 +89,8 @@ final class SignInViewController: UIViewController {
             return
         }
         
+        HapticsManager.shared.vibrateForSelection()
+        
         AuthManager.shared.singIn(email: email, password: password) { [weak self] success in
             self?.signInButton.configuration?.showsActivityIndicator = true
             self?.signInButton.configuration?.title = ""
