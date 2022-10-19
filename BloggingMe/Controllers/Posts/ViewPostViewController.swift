@@ -37,11 +37,22 @@ final class ViewPostViewController: UITabBarController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sharePostTapped))
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.safeAreaLayoutGuide.layoutFrame
+    }
+    
+    @objc private func sharePostTapped() {
+        guard let imageUrl = post.headerImageUrl else { return }
+        
+        if let data = try? Data(contentsOf: imageUrl) {
+            let avc = UIActivityViewController(activityItems: [
+                UIImage(data: data) as Any], applicationActivities: nil)
+            present(avc, animated: true)
+        }
     }
 }
 
