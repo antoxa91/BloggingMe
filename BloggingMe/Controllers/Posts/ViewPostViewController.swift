@@ -33,7 +33,7 @@ final class ViewPostViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "PrimaryBackground")
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self

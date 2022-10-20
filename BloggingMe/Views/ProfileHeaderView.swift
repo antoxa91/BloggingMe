@@ -9,9 +9,11 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
     
+    let gradient = CAGradientLayer()
+
     let profilePhoto: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "person.circle"))
-        imageView.tintColor = .white
+        imageView.tintColor = UIColor(named: "CompButtonBackground")
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
@@ -22,14 +24,13 @@ final class ProfileHeaderView: UIView {
     let emailLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBlue
+        setupGradientView()
         setupViews()
         setConstraints()
     }
@@ -46,9 +47,21 @@ final class ProfileHeaderView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+        gradient.frame = self.bounds
         profilePhoto.layer.cornerRadius = profilePhoto.frame.size.width/2
-        emailLabel.font = .systemFont(ofSize: frame.width/20, weight: .bold)
+        emailLabel.font = UIFont(name: "Avenir Black", size: frame.width/20)
+    }
+    
+    private func setupGradientView(){
+        gradient.colors = [
+            UIColor(red: 197/255, green: 188/255, blue: 246/255, alpha: 0.2).cgColor,
+            UIColor(red: 162/255, green: 139/255, blue: 238/255, alpha: 0.4).cgColor,
+            UIColor(red: 140/255, green: 111/255, blue: 234/255, alpha: 0.6).cgColor]
+        gradient.startPoint = CGPoint.zero
+        gradient.endPoint = CGPoint(x: 0, y: 1)
+        gradient.locations = [0.1, 0.4, 1.0]
+        gradient.cornerRadius = 20
+        self.layer.addSublayer(gradient)
     }
 }
 
@@ -63,7 +76,7 @@ extension ProfileHeaderView {
             profilePhoto.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
             
             emailLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            emailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+            emailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
     }
 }

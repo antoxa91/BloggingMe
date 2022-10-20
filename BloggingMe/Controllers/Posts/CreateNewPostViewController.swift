@@ -26,8 +26,8 @@ final class CreateNewPostViewController: UITabBarController {
         imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(systemName: "photo")
-        imageView.backgroundColor = .tertiarySystemBackground
         imageView.clipsToBounds = true
+        imageView.tintColor = UIColor(named: "CompButtonBackground")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -36,6 +36,7 @@ final class CreateNewPostViewController: UITabBarController {
         let textView = UITextView()
         textView.isEditable = true
         textView.backgroundColor = .tertiarySystemBackground
+        textView.layer.cornerRadius = 15
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -44,8 +45,8 @@ final class CreateNewPostViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        
+        view.backgroundColor = UIColor(named: "PrimaryBackground")
+
         setupViews()
         configureButtons()
         setConstraints()
@@ -62,7 +63,7 @@ final class CreateNewPostViewController: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        textView.font = .systemFont(ofSize: view.frame.size.width/15)
+        textView.font = .systemFont(ofSize: view.frame.size.width/16)
     }
     
     @objc private func didTapHeader() {
@@ -73,12 +74,8 @@ final class CreateNewPostViewController: UITabBarController {
     }
     
     private func configureButtons() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(didTapCancel))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(didTapPost))
-    }
-    
-    @objc private func didTapCancel() {
-        dismiss(animated: true)
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "CompButtonBackground")
     }
     
     @objc private func didTapPost() {
@@ -120,7 +117,8 @@ final class CreateNewPostViewController: UITabBarController {
                     
                     DispatchQueue.main.async {
                         HapticsManager.shared.vibrate(for: .success)
-                        self?.didTapCancel()
+                      //  self?.didTapCancel()
+                        self?.dismiss(animated: true)
                     }
                 }
             }
@@ -154,11 +152,9 @@ extension CreateNewPostViewController {
             headerImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
             headerImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
 
-            
             textView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 10),
-            textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            textView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            textView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }

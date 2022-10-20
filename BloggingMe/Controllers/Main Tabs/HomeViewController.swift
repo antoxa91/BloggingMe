@@ -13,11 +13,12 @@ final class HomeViewController: UIViewController {
 
     private let composeButton: UIButton = {
        let button = UIButton()
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = UIColor(named: "CompButtonBackground")
         button.tintColor = .white
-        button.layer.shadowColor = UIColor.label.cgColor
-        button.layer.shadowOpacity = 0.4
-        button.layer.shadowRadius = 10
+        button.layer.shadowColor = UIColor.blue.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 3
+        button.layer.shadowOffset = CGSize(width: 2, height: -2)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -27,13 +28,15 @@ final class HomeViewController: UIViewController {
         tableView.register(PostPreviewTableViewCell.self,
                            forCellReuseIdentifier: PostPreviewTableViewCell.identifier)
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = UIColor(named: "PrimaryBackground")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "PrimaryBackground")
         view.addSubview(tableView)
         view.addSubview(composeButton)
         tableView.delegate = self
@@ -55,6 +58,7 @@ final class HomeViewController: UIViewController {
         let vc = CreateNewPostViewController()
         vc.title = "Create Post"
         let navVC = UINavigationController(rootViewController: vc)
+        navVC.sheetPresentationController?.prefersGrabberVisible = true
         present(navVC, animated: true)
     }
 }
@@ -109,7 +113,7 @@ extension HomeViewController {
             composeButton.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.15),
             composeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.15),
             composeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            composeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            composeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25),
         ])
     }
 }

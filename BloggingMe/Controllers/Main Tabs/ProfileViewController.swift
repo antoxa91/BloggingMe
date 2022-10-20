@@ -16,6 +16,9 @@ final class ProfileViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(PostPreviewTableViewCell.self,
                            forCellReuseIdentifier: PostPreviewTableViewCell.identifier)
+        tableView.backgroundColor = UIColor(named: "PrimaryBackground")
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -35,7 +38,8 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "PrimaryBackground")
+        navigationController?.navigationBar.tintColor = UIColor(named: "CompButtonBackground")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(didTapSignOut))
         setupTable()
         fetchPosts()
@@ -113,6 +117,10 @@ extension ProfileViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPreviewTableViewCell.identifier, for: indexPath) as? PostPreviewTableViewCell else { return UITableViewCell() }
         cell.configure(with: .init(title: post.title, imageUrl: post.headerImageUrl))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "My Posts"
     }
 }
 
@@ -203,7 +211,7 @@ extension ProfileViewController {
             
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

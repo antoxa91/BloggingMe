@@ -23,6 +23,7 @@ final class PostPreviewTableViewCell: UITableViewCell {
     private let postTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.highlightedTextColor = .purple
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -32,6 +33,7 @@ final class PostPreviewTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(postImageView)
         contentView.addSubview(postTitleLabel)
+        backgroundColor = UIColor(named: "PrimaryBackground")
     }
     
     required init?(coder: NSCoder) {
@@ -40,7 +42,7 @@ final class PostPreviewTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        postTitleLabel.font = .systemFont(ofSize: frame.size.width/20, weight: .medium)
+        postTitleLabel.font = .systemFont(ofSize: frame.size.width/21, weight: .medium)
         setConstraints()
     }
     
