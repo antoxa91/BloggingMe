@@ -72,6 +72,6 @@ final class TabBarController: UITabBarController {
         roundLayer.shadowOffset = CGSize(width: 0, height: -2)
 
         tabBar.tintColor = UIColor(named: "TabBarTint")
-        tabBar.unselectedItemTintColor = .systemGray
+        tabBar.unselectedItemTintColor = .systemGray2
     }
 }
