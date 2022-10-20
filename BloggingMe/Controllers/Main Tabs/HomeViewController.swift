@@ -37,6 +37,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
+        navigationController?.navigationBar.tintColor = UIColor(named: "CompButtonBackground")
         view.addSubview(tableView)
         view.addSubview(composeButton)
         tableView.delegate = self
