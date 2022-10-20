@@ -41,6 +41,7 @@ final class SignInViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.configuration = .filled()
+        button.configuration?.baseBackgroundColor = UIColor(named: "CompButtonBackground")
         button.configuration?.title = "Sign in with Email"
         return button
     }()
@@ -58,7 +59,7 @@ final class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Sign In"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "PrimaryBackground")
         setupViews()
         setConstraints()
         setButtonTargets()

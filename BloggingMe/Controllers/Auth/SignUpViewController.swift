@@ -76,7 +76,7 @@ final class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Create Account"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "PrimaryBackground")
         setupViews()
         setConstraints()
         signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
