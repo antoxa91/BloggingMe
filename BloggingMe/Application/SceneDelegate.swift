@@ -26,7 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             navVC.navigationBar.prefersLargeTitles = true
             vc = navVC
         }
-        //TODO: update vc to sign in vc if not signed in
         window?.rootViewController = vc
     }
     
