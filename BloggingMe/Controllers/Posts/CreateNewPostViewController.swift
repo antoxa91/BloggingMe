@@ -117,7 +117,6 @@ final class CreateNewPostViewController: UITabBarController {
                     
                     DispatchQueue.main.async {
                         HapticsManager.shared.vibrate(for: .success)
-                      //  self?.didTapCancel()
                         self?.dismiss(animated: true)
                     }
                 }
@@ -144,17 +143,17 @@ extension CreateNewPostViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
             titleField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            titleField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            titleField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             titleField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             titleField.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.1),
             
-            headerImageView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: 10),
+            headerImageView.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: 8),
             headerImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
             headerImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
 
-            textView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 10),
+            textView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 8),
             textView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            textView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            textView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 }
