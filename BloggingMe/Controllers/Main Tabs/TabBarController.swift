@@ -11,8 +11,8 @@ final class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.additionalSafeAreaInsets.bottom = 15
-        setTabBarAppearance()
+        animateAppearance(alpha: 0.9)
+        setTabBarAppearance(bottomInset: 15)
         setupControllers()
     }
     
@@ -41,7 +41,9 @@ final class TabBarController: UITabBarController {
         setViewControllers([homeVC, createPostVC, profileVC], animated: true)
     }
     
-    private func setTabBarAppearance() {
+    private func setTabBarAppearance(bottomInset: CGFloat) {
+        self.additionalSafeAreaInsets.bottom = bottomInset
+
         let positionOnX: CGFloat = 10
         let positionOnY: CGFloat = 12
         let width = tabBar.bounds.width - positionOnX * 2
@@ -70,8 +72,23 @@ final class TabBarController: UITabBarController {
         roundLayer.shadowOpacity = 0.5
         roundLayer.shadowColor = UIColor.blue.cgColor
         roundLayer.shadowOffset = CGSize(width: 0, height: -2)
-
+        
         tabBar.tintColor = UIColor(named: "TabBarTint")
         tabBar.unselectedItemTintColor = .systemGray2
+        
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
+    private func animateAppearance(alpha: CGFloat) {
+        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 10, animations: { [tabBar = self.tabBar] in
+            tabBar.transform.c = -0.5
+            tabBar.transform.a = 1.5
+
+            tabBar.alpha = alpha
+            tabBar.transform = .identity
+        })
     }
 }
