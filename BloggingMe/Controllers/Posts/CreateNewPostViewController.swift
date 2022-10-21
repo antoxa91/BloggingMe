@@ -28,6 +28,7 @@ final class CreateNewPostViewController: UITabBarController {
         imageView.image = UIImage(systemName: "photo")
         imageView.clipsToBounds = true
         imageView.tintColor = UIColor(named: "CompButtonBackground")
+        imageView.backgroundColor = UIColor(named: "PrimaryBackground")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -36,6 +37,8 @@ final class CreateNewPostViewController: UITabBarController {
         let textView = UITextView()
         textView.isEditable = true
         textView.backgroundColor = .tertiarySystemBackground
+        textView.text = "Start typing..."
+        textView.alpha = 0.4
         textView.layer.cornerRadius = 15
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
@@ -51,8 +54,11 @@ final class CreateNewPostViewController: UITabBarController {
         configureButtons()
         setConstraints()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
-        headerImageView.addGestureRecognizer(tap)
+        headerImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapHeader)))
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setupViews() {
@@ -126,6 +132,36 @@ final class CreateNewPostViewController: UITabBarController {
 }
 
 
+// MARK: - Adjust For Keyboard
+extension CreateNewPostViewController {
+    @objc private func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    @objc private func adjustForKeyboard(notification: NSNotification) {
+        if notification.name == UIResponder.keyboardWillShowNotification {
+            UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: .calculationModeLinear) { [headerImageView = self.headerImageView] in
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.35) {
+                    headerImageView.layer.cornerRadius = 15
+                    headerImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                    headerImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.45).isActive = true
+                    self.textView.alpha = 1
+                }
+            }
+        } else {
+            UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeLinear) { [headerImageView = self.headerImageView] in
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.35) {
+                    headerImageView.layer.cornerRadius = 0
+                    headerImageView.transform = .identity
+                    headerImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
+                }
+            }
+        }
+    }
+}
+
+
+// MARK: - UIImagePickerControllerDelegate
 extension CreateNewPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
@@ -153,7 +189,7 @@ extension CreateNewPostViewController {
 
             textView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 8),
             textView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            textView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            textView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -10),
         ])
     }
 }
