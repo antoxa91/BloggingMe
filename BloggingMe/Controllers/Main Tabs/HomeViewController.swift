@@ -52,7 +52,6 @@ final class HomeViewController: UIViewController {
         composeButton.layer.cornerRadius = composeButton.frame.size.width/2
         composeButton.setImage(
             UIImage(systemName: "square.and.pencil", withConfiguration: UIImage.SymbolConfiguration(pointSize: view.frame.size.width/18, weight: .medium)), for: .normal)
-        tableView.frame = view.safeAreaLayoutGuide.layoutFrame
     }
     
     @objc private func didTapCreate() {
@@ -111,6 +110,10 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             composeButton.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.15),
             composeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.15),
             composeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
