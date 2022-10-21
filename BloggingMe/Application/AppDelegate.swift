@@ -13,6 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+
         return true
     }
     
