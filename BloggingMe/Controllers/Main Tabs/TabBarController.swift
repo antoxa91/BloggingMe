@@ -36,7 +36,7 @@ final class TabBarController: UITabBarController {
         let createPost = CreateNewPostViewController()
         createPost.title = "Create Post"
         let createPostVC = UINavigationController(rootViewController: createPost)
-        createPostVC.tabBarItem = UITabBarItem(title: "Create Post", image: UIImage(systemName: "plus.circle"), tag: 3)
+        createPostVC.tabBarItem = UITabBarItem(title: "Create Post", image: UIImage(systemName: "plus.square"), tag: 3)
         
         setViewControllers([homeVC, createPostVC, profileVC], animated: true)
     }

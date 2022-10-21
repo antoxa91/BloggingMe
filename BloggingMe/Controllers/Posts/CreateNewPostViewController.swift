@@ -144,7 +144,7 @@ extension CreateNewPostViewController {
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.35) {
                     headerImageView.layer.cornerRadius = 15
                     headerImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-                    headerImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.45).isActive = true
+                    headerImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3).isActive = true
                     self.textView.alpha = 1
                 }
             }
@@ -189,7 +189,7 @@ extension CreateNewPostViewController {
 
             textView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 8),
             textView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            textView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -10),
+            textView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -8),
         ])
     }
 }
