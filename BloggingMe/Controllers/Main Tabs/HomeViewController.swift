@@ -13,7 +13,7 @@ final class HomeViewController: UIViewController {
 
     private let composeButton: UIButton = {
        let button = UIButton()
-        button.backgroundColor = UIColor(named: "CompButtonBackground")
+        button.backgroundColor = UIColor(named: "ButtonBackground")
         button.tintColor = .white
         button.layer.shadowColor = UIColor.blue.cgColor
         button.layer.shadowOpacity = 0.5
@@ -37,7 +37,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
-        navigationController?.navigationBar.tintColor = UIColor(named: "CompButtonBackground")
+        navigationController?.navigationBar.tintColor = UIColor(named: "ButtonBackground")
         view.addSubview(tableView)
         view.addSubview(composeButton)
         tableView.delegate = self

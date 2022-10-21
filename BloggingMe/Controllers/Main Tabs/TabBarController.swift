@@ -65,7 +65,7 @@ final class TabBarController: UITabBarController {
         tabBar.itemWidth = width / 5
         tabBar.itemPositioning = .centered
         
-        roundLayer.fillColor = UIColor(named: "CompButtonBackground")!.cgColor
+        roundLayer.fillColor = UIColor(named: "ButtonBackground")!.cgColor
         roundLayer.shadowRadius = 5
         roundLayer.shadowOpacity = 0.5
         roundLayer.shadowColor = UIColor.blue.cgColor

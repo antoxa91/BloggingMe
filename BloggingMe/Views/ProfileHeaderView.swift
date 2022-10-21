@@ -13,7 +13,7 @@ final class ProfileHeaderView: UIView {
 
     let profilePhoto: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "person.circle"))
-        imageView.tintColor = UIColor(named: "CompButtonBackground")
+        imageView.tintColor = UIColor(named: "ButtonBackground")
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true

@@ -27,7 +27,7 @@ final class CreateNewPostViewController: UITabBarController {
         imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(systemName: "photo")
         imageView.clipsToBounds = true
-        imageView.tintColor = UIColor(named: "CompButtonBackground")
+        imageView.tintColor = UIColor(named: "ButtonBackground")
         imageView.backgroundColor = UIColor(named: "PrimaryBackground")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -81,7 +81,7 @@ final class CreateNewPostViewController: UITabBarController {
     
     private func configureButtons() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(didTapPost))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "CompButtonBackground")
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "ButtonBackground")
     }
     
     @objc private func didTapPost() {

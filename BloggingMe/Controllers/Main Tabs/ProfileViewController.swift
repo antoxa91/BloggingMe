@@ -39,7 +39,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
-        navigationController?.navigationBar.tintColor = UIColor(named: "CompButtonBackground")
+        navigationController?.navigationBar.tintColor = UIColor(named: "ButtonBackground")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(didTapSignOut))
         setupTable()
         fetchPosts()
