@@ -16,13 +16,17 @@ final class StorageManager {
     
     private init() {}
     
+    static func userEmail(_ emailAddress: String) -> String {
+        var userEmail = emailAddress.replacingOccurrences(of: "@", with: "_")
+        userEmail = userEmail.replacingOccurrences(of: ".", with: "_")
+        return userEmail
+    }
+    
     public func uploadUserProfilePicture(email: String, image: UIImage?, completion: @escaping (Bool) -> Void) {
-        let path = email
-            .replacingOccurrences(of: "@", with: "_")
-            .replacingOccurrences(of: ".", with: "_")
+        let path = StorageManager.userEmail(email)
         
         guard let jpegData = image?.jpegData(compressionQuality: 0.5) else { return }
-                
+        
         container
             .reference(withPath: "profile_pictures/\(path)/photo.png")
             .putData(jpegData) { metadata, error in
@@ -42,9 +46,7 @@ final class StorageManager {
     }
     
     public func uploadBlogHeaderImage(email: String, image: UIImage?, postId: String, completion: @escaping (Bool) -> Void) {
-        let path = email
-            .replacingOccurrences(of: "@", with: "_")
-            .replacingOccurrences(of: ".", with: "_")
+        let path = StorageManager.userEmail(email)
         
         guard let jpegData = image?.jpegData(compressionQuality: 0.8) else { return }
         
@@ -60,14 +62,26 @@ final class StorageManager {
     }
     
     public func downloadURLForPostHeader(email: String, postId: String, completion: @escaping (URL?) -> Void) {
-        let emailComponent = email
-            .replacingOccurrences(of: "@", with: "_")
-            .replacingOccurrences(of: ".", with: "_")
+        let path = StorageManager.userEmail(email)
         
         container
-            .reference(withPath: "post_headers/\(emailComponent)/\(postId).png")
+            .reference(withPath: "post_headers/\(path)/\(postId).png")
             .downloadURL { url, _ in
                 completion(url)
+            }
+    }
+    
+    public func deleteBlogHeaderImage(email: String, postId: String, completion: @escaping (Bool) -> Void) {
+        let path = StorageManager.userEmail(email)
+        
+        container
+            .reference(withPath: "post_headers/\(path)/\(postId).png")
+            .delete { error in
+                if error != nil {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
             }
     }
 }
