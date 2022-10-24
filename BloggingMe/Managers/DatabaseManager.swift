@@ -13,13 +13,10 @@ final class DatabaseManager {
     static let shared = DatabaseManager()
     
     private let database = Firestore.firestore()
-    
     private init() {}
     
     public func insertPost(blogPost: BlogPost, email: String, completion: @escaping(Bool) -> Void) {
-        let userEmail = email
-            .replacingOccurrences(of: ".", with: "_")
-            .replacingOccurrences(of: "@", with: "_")
+        let path = StorageManager.userEmail(email)
         
         let data: [String: Any] = [
             "id": blogPost.identifier,
@@ -31,7 +28,7 @@ final class DatabaseManager {
         
         database
             .collection("users")
-            .document(userEmail)
+            .document(path)
             .collection("posts")
             .document(blogPost.identifier)
             .setData(data) { error in
@@ -73,12 +70,11 @@ final class DatabaseManager {
     }
     
     public func getUserPosts(for email: String, completion: @escaping([BlogPost]) -> Void) {
-        let userEmail = email
-            .replacingOccurrences(of: ".", with: "_")
-            .replacingOccurrences(of: "@", with: "_")
+        let path = StorageManager.userEmail(email)
+
         database
             .collection("users")
-            .document(userEmail)
+            .document(path)
             .collection("posts")
             .getDocuments { snapshot, error in
                 guard let documents = snapshot?.documents.compactMap({ $0.data() }),
@@ -128,13 +124,11 @@ final class DatabaseManager {
     }
     
     public func getUser(email: String, completion: @escaping (User?) -> Void) {
-        let documentID = email
-            .replacingOccurrences(of: ".", with: "_")
-            .replacingOccurrences(of: "@", with: "_")
+        let path = StorageManager.userEmail(email)
         
         database
             .collection("users")
-            .document(documentID)
+            .document(path)
             .getDocument { snapshot, error in
                 guard let data = snapshot?.data() as? [String: String],
                       let name = data["name"],
@@ -149,9 +143,7 @@ final class DatabaseManager {
     }
     
     public func updateProfilePhoto(email: String, completion: @escaping (Bool) -> Void) {
-        let path = email
-            .replacingOccurrences(of: "@", with: "_")
-            .replacingOccurrences(of: ".", with: "_")
+        let path = StorageManager.userEmail(email)
         
         let photoReference = "profile_pictures/\(path)/photo.png"
         
@@ -167,5 +159,22 @@ final class DatabaseManager {
                 completion(error == nil)
             }
         }
+    }
+    
+    public func deletePost(email: String, postId: String, blogPost: BlogPost, completion: @escaping (Bool) -> Void) {
+        let path = StorageManager.userEmail(email)
+        
+        database
+            .collection("users")
+            .document(path)
+            .collection("posts")
+            .document(blogPost.identifier)
+            .delete { error in
+                if error != nil {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }
     }
 }
