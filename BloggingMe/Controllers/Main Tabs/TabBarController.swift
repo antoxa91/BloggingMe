@@ -33,12 +33,7 @@ final class TabBarController: UITabBarController {
         profileVC.navigationBar.prefersLargeTitles = true
         profileVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 2)
         
-        let createPost = CreateNewPostViewController()
-        createPost.title = "Create Post"
-        let createPostVC = UINavigationController(rootViewController: createPost)
-        createPostVC.tabBarItem = UITabBarItem(title: "Create Post", image: UIImage(systemName: "plus.square"), tag: 3)
-        
-        setViewControllers([homeVC, createPostVC, profileVC], animated: true)
+        setViewControllers([homeVC, profileVC], animated: true)
     }
     
     private func setTabBarAppearance(bottomInset: CGFloat) {
@@ -64,7 +59,7 @@ final class TabBarController: UITabBarController {
         
         tabBar.layer.insertSublayer(roundLayer, at: 0)
         
-        tabBar.itemWidth = width / 5
+        tabBar.itemWidth = width / 3
         tabBar.itemPositioning = .centered
         
         roundLayer.fillColor = UIColor(named: "ButtonBackground")!.cgColor
