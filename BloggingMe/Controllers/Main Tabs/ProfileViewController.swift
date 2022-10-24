@@ -101,7 +101,7 @@ extension ProfileViewController: UITableViewDelegate {
 extension ProfileViewController: UITableViewDataSource {
     private func fetchPosts(){
         DatabaseManager.shared.getUserPosts(for: currentEmail) {[weak self] posts in
-            self?.posts = posts
+            self?.posts = posts.sorted(by: >)
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -121,6 +121,27 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         "My Posts"
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let postId = posts[indexPath.row].identifier
+            tableView.beginUpdates()
+            
+            DatabaseManager.shared.deletePost(email: currentEmail, postId: postId, blogPost: posts[indexPath.row]) { success in
+                guard success else { return }
+                self.posts.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+                DispatchQueue.main.async {
+                    HapticsManager.shared.vibrate(for: .success)
+                }
+            }
+
+            StorageManager.shared.deleteBlogHeaderImage(email: currentEmail, postId: postId) { success in
+                guard success else { return }
+            }            
+            tableView.endUpdates()
+        }
     }
 }
 
