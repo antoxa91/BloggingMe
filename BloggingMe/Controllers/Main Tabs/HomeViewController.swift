@@ -47,7 +47,6 @@ final class HomeViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
     private func fetchAllPosts(){
-        print("Fetching home feed...")
         DatabaseManager.shared.getAllPosts { [weak self] posts in
             self?.posts = posts
             DispatchQueue.main.async {

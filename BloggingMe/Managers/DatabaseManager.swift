@@ -67,7 +67,6 @@ final class DatabaseManager {
                 }
                 
                 group.notify(queue: .global()) {
-                    print("Feed posts: \(result.count)")
                     completion(result)
                 }
             }

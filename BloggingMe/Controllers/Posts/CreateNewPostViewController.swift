@@ -46,6 +46,15 @@ final class CreateNewPostViewController: UITabBarController {
     
     private var selectedHeaderImage: UIImage?
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+       let activityIndicator = UIActivityIndicatorView()
+       activityIndicator.style = .large
+       activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+       activityIndicator.hidesWhenStopped = true
+       activityIndicator.color = .white
+       return activityIndicator
+   }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
@@ -65,6 +74,7 @@ final class CreateNewPostViewController: UITabBarController {
         view.addSubview(headerImageView)
         view.addSubview(textView)
         view.addSubview(titleField)
+        view.addSubview(activityIndicator)
     }
     
     override func viewDidLayoutSubviews() {
@@ -98,6 +108,8 @@ final class CreateNewPostViewController: UITabBarController {
             return
         }
         
+        activityIndicator.startAnimating()
+        
         let newPostId = UUID().uuidString
         
         StorageManager.shared.uploadBlogHeaderImage(email: email, image: headerImage, postId: newPostId) { success in
@@ -124,6 +136,7 @@ final class CreateNewPostViewController: UITabBarController {
                     DispatchQueue.main.async {
                         HapticsManager.shared.vibrate(for: .success)
                         self?.dismiss(animated: true)
+                        self?.activityIndicator.stopAnimating()
                     }
                 }
             }
@@ -190,6 +203,9 @@ extension CreateNewPostViewController {
             textView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 8),
             textView.widthAnchor.constraint(equalTo: view.widthAnchor),
             textView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -8),
+            
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }
