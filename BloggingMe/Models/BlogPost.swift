@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct BlogPost {
+struct BlogPost: Comparable {
     let identifier: String
     let title: String
     let timestamp: TimeInterval
     let headerImageUrl: URL?
     let text: String
+    
+    static func < (lhs: BlogPost, rhs: BlogPost) -> Bool {
+        return lhs.timestamp < rhs.timestamp
+    }
 }
