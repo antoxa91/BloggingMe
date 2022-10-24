@@ -10,18 +10,6 @@ import UIKit
 final class HomeViewController: UIViewController {
     
     private var posts: [BlogPost] = []
-
-    private let composeButton: UIButton = {
-       let button = UIButton()
-        button.backgroundColor = UIColor(named: "ButtonBackground")
-        button.tintColor = .white
-        button.layer.shadowColor = UIColor.blue.cgColor
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 3
-        button.layer.shadowOffset = CGSize(width: 2, height: -2)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -38,20 +26,12 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
         navigationController?.navigationBar.tintColor = UIColor(named: "ButtonBackground")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .done, target: self, action: #selector(didTapCreate))
         view.addSubview(tableView)
-        view.addSubview(composeButton)
         tableView.delegate = self
         tableView.dataSource = self
-        composeButton.addTarget(self, action: #selector(didTapCreate), for: .touchUpInside)
         fetchAllPosts()
         setConstraints()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        composeButton.layer.cornerRadius = composeButton.frame.size.width/2
-        composeButton.setImage(
-            UIImage(systemName: "square.and.pencil", withConfiguration: UIImage.SymbolConfiguration(pointSize: view.frame.size.width/18, weight: .medium)), for: .normal)
     }
     
     @objc private func didTapCreate() {
@@ -112,12 +92,7 @@ extension HomeViewController {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            composeButton.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.15),
-            composeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.15),
-            composeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            composeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
