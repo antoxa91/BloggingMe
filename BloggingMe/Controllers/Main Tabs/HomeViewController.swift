@@ -48,7 +48,7 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource {
     private func fetchAllPosts(){
         DatabaseManager.shared.getAllPosts { [weak self] posts in
-            self?.posts = posts
+            self?.posts = posts.sorted(by: >)
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
