@@ -20,7 +20,7 @@ final class TabBarController: UITabBarController {
         guard let currentUserEmail = UserDefaults.standard.string(forKey: "email") else { return }
         
         let home = HomeViewController()
-        home.title = "Home"
+        home.title = "Posts by all users"
         home.navigationItem.largeTitleDisplayMode = .always
         let homeVC = UINavigationController(rootViewController: home)
         homeVC.navigationBar.prefersLargeTitles = true
