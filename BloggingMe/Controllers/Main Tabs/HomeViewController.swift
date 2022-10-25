@@ -22,12 +22,26 @@ final class HomeViewController: UIViewController {
         return tableView
     }()
     
+    private let appNameButton: UIButton = {
+        let b = UIButton()
+        let attributedString = NSMutableAttributedString(string: "BloggingMe", attributes: [.foregroundColor: UIColor.red, .font: UIFont(name: "Cochin Bold Italic", size: 20) as Any])
+        b.setAttributedTitle(attributedString, for: .normal)
+        b.layer.shadowColor = UIColor(named: "ButtonBackground")?.cgColor
+        b.layer.shadowOffset = .init(width: 1, height: 4)
+        b.layer.shadowOpacity = 0.5
+        return b
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = UIColor(named: "PrimaryBackground")
         navigationController?.navigationBar.tintColor = UIColor(named: "ButtonBackground")
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: appNameButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .done, target: self, action: #selector(didTapCreate))
         view.addSubview(tableView)
+        
         tableView.delegate = self
         tableView.dataSource = self
         fetchAllPosts()
