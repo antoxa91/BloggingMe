@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ShimmerSwift
 
 final class HomeViewController: UIViewController {
     
@@ -32,20 +33,39 @@ final class HomeViewController: UIViewController {
         return b
     }()
     
+    private let shimmerView: ShimmeringView = {
+        let shimmer = ShimmeringView()
+        shimmer.isShimmering = true
+        shimmer.shimmerSpeed = 20
+        shimmer.shimmerAnimationOpacity = 0.4
+        shimmer.translatesAutoresizingMaskIntoConstraints = false
+        return shimmer
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(named: "PrimaryBackground")
-        navigationController?.navigationBar.tintColor = UIColor(named: "ButtonBackground")
-        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: appNameButton)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .done, target: self, action: #selector(didTapCreate))
         view.addSubview(tableView)
-        
+        setupCustomNavigationBar()
         tableView.delegate = self
         tableView.dataSource = self
         fetchAllPosts()
         setConstraints()
+    }
+    
+
+    private func setupCustomNavigationBar() {
+        navigationController?.navigationBar.tintColor = UIColor(named: "ButtonBackground")
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .done, target: self, action: #selector(didTapCreate))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: appNameButton)
+        
+        navigationController?.navigationBar.addSubview(shimmerView)
+        shimmerView.center = appNameButton.center
+        shimmerView.contentView = appNameButton
     }
     
     @objc private func didTapCreate() {
@@ -105,7 +125,10 @@ extension HomeViewController {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            shimmerView.widthAnchor.constraint(equalTo: appNameButton.widthAnchor),
+            shimmerView.heightAnchor.constraint(equalTo: appNameButton.heightAnchor)
         ])
     }
 }
