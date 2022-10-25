@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5510DCE552C31D77A5FE3037 /* Pods_BloggingMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4580941AEFD02376A2013FA /* Pods_BloggingMe.framework */; };
 		C51CD68B28FFFE9500E8778A /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51CD68A28FFFE9500E8778A /* HapticsManager.swift */; };
 		C525381E28F96F5200264261 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C525381D28F96F5200264261 /* ProfileHeaderView.swift */; };
 		C5478D3B28EF1678001D0A74 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5478D3A28EF1678001D0A74 /* User.swift */; };
@@ -32,18 +33,17 @@
 		C5DB5B9128FE8C6400334EC7 /* PostHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DB5B9028FE8C6400334EC7 /* PostHeaderTableViewCell.swift */; };
 		C5DB5B9328FE91CF00334EC7 /* PostPreviewTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DB5B9228FE91CF00334EC7 /* PostPreviewTableViewCellViewModel.swift */; };
 		C5DB5B9528FE9A0600334EC7 /* PostHeaderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DB5B9428FE9A0600334EC7 /* PostHeaderTableViewCellViewModel.swift */; };
-		FF530B5F97E07979CCB7B967 /* Pods_BloggingMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61566EAC9C3B877E6A2FE522 /* Pods_BloggingMe.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		219F26C041A0A67EF95A225E /* Pods-BloggingMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloggingMe.release.xcconfig"; path = "Target Support Files/Pods-BloggingMe/Pods-BloggingMe.release.xcconfig"; sourceTree = "<group>"; };
-		61566EAC9C3B877E6A2FE522 /* Pods_BloggingMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BloggingMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50833B7F930D322A8447E469 /* Pods-BloggingMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloggingMe.release.xcconfig"; path = "Target Support Files/Pods-BloggingMe/Pods-BloggingMe.release.xcconfig"; sourceTree = "<group>"; };
+		81CAAC29EE6F108EEA9E3A71 /* Pods-BloggingMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloggingMe.debug.xcconfig"; path = "Target Support Files/Pods-BloggingMe/Pods-BloggingMe.debug.xcconfig"; sourceTree = "<group>"; };
+		A4580941AEFD02376A2013FA /* Pods_BloggingMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BloggingMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C51CD68A28FFFE9500E8778A /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		C525381D28F96F5200264261 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		C5478D3A28EF1678001D0A74 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C5478D3C28EF1687001D0A74 /* BlogPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
 		C56CA84D28F548E9003EA427 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C5842F21A5F15B2EBDA0F493 /* Pods-BloggingMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloggingMe.debug.xcconfig"; path = "Target Support Files/Pods-BloggingMe/Pods-BloggingMe.debug.xcconfig"; sourceTree = "<group>"; };
 		C58C306E28EEEC160099ACD7 /* BloggingMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloggingMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58C307128EEEC160099ACD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C58C307328EEEC160099ACD7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,17 +73,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF530B5F97E07979CCB7B967 /* Pods_BloggingMe.framework in Frameworks */,
+				5510DCE552C31D77A5FE3037 /* Pods_BloggingMe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		92DAC6354D3D708E78691EAF /* Frameworks */ = {
+		3267F0833EC087E7421496F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				61566EAC9C3B877E6A2FE522 /* Pods_BloggingMe.framework */,
+				A4580941AEFD02376A2013FA /* Pods_BloggingMe.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -94,7 +94,7 @@
 				C58C307028EEEC160099ACD7 /* BloggingMe */,
 				C58C306F28EEEC160099ACD7 /* Products */,
 				E94658B8E8A468782A12BABE /* Pods */,
-				92DAC6354D3D708E78691EAF /* Frameworks */,
+				3267F0833EC087E7421496F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,8 +222,8 @@
 		E94658B8E8A468782A12BABE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C5842F21A5F15B2EBDA0F493 /* Pods-BloggingMe.debug.xcconfig */,
-				219F26C041A0A67EF95A225E /* Pods-BloggingMe.release.xcconfig */,
+				81CAAC29EE6F108EEA9E3A71 /* Pods-BloggingMe.debug.xcconfig */,
+				50833B7F930D322A8447E469 /* Pods-BloggingMe.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -235,11 +235,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C58C308228EEEC170099ACD7 /* Build configuration list for PBXNativeTarget "BloggingMe" */;
 			buildPhases = (
-				FDD7DF7DFA9B591466F97BC7 /* [CP] Check Pods Manifest.lock */,
+				91705589D6AEC527F11C7AD1 /* [CP] Check Pods Manifest.lock */,
 				C58C306A28EEEC160099ACD7 /* Sources */,
 				C58C306B28EEEC160099ACD7 /* Frameworks */,
 				C58C306C28EEEC160099ACD7 /* Resources */,
-				C90C95C7921D997EC507A3FA /* [CP] Embed Pods Frameworks */,
+				719D6504164128EA9D405B88 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -297,7 +297,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C90C95C7921D997EC507A3FA /* [CP] Embed Pods Frameworks */ = {
+		719D6504164128EA9D405B88 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -314,7 +314,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BloggingMe/Pods-BloggingMe-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FDD7DF7DFA9B591466F97BC7 /* [CP] Check Pods Manifest.lock */ = {
+		91705589D6AEC527F11C7AD1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -498,7 +498,7 @@
 		};
 		C58C308328EEEC170099ACD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5842F21A5F15B2EBDA0F493 /* Pods-BloggingMe.debug.xcconfig */;
+			baseConfigurationReference = 81CAAC29EE6F108EEA9E3A71 /* Pods-BloggingMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -530,7 +530,7 @@
 		};
 		C58C308428EEEC170099ACD7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 219F26C041A0A67EF95A225E /* Pods-BloggingMe.release.xcconfig */;
+			baseConfigurationReference = 50833B7F930D322A8447E469 /* Pods-BloggingMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
