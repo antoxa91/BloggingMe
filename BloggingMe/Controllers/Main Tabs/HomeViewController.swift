@@ -47,7 +47,7 @@ final class HomeViewController: UIViewController {
         
         view.backgroundColor = UIColor(named: "PrimaryBackground")
         view.addSubview(tableView)
-        setupCustomNavigationBar()
+        configureNavBar()
         tableView.delegate = self
         tableView.dataSource = self
         fetchAllPosts()
@@ -60,7 +60,7 @@ final class HomeViewController: UIViewController {
         animateTableView()
     }
 
-    private func setupCustomNavigationBar() {
+    private func configureNavBar() {
         navigationController?.navigationBar.tintColor = UIColor(named: "ButtonBackground")
         navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.dash"))
         
