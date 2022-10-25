@@ -52,8 +52,13 @@ final class HomeViewController: UIViewController {
         tableView.dataSource = self
         fetchAllPosts()
         setConstraints()
+        animateTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateTableView()
+    }
 
     private func setupCustomNavigationBar() {
         navigationController?.navigationBar.tintColor = UIColor(named: "ButtonBackground")
@@ -74,6 +79,26 @@ final class HomeViewController: UIViewController {
         let navVC = UINavigationController(rootViewController: vc)
         navVC.sheetPresentationController?.prefersGrabberVisible = true
         present(navVC, animated: true)
+    }
+    
+    private func animateTableView() {
+        let cells = tableView.visibleCells
+        let tableViewHeight = tableView.bounds.height
+        var delay = 0.0
+
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+
+            UIView.animate(withDuration: 1.5,
+                           delay: delay * 0.1,
+                           usingSpringWithDamping: 0.7,
+                           initialSpringVelocity: 0,
+                           options: .curveEaseInOut,
+                           animations: {
+                cell.transform = CGAffineTransform.identity
+            })
+            delay += 1
+        }
     }
 }
 
