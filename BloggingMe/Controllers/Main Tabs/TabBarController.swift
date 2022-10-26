@@ -24,14 +24,14 @@ final class TabBarController: UITabBarController {
         home.navigationItem.largeTitleDisplayMode = .always
         let homeVC = UINavigationController(rootViewController: home)
         homeVC.navigationBar.prefersLargeTitles = true
-        homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 1)
+        homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "home"), tag: 1)
         
         let profile = ProfileViewController(currentEmail: currentUserEmail)
         profile.title = "Profile"
         profile.navigationItem.largeTitleDisplayMode = .always
         let profileVC = UINavigationController(rootViewController: profile)
         profileVC.navigationBar.prefersLargeTitles = true
-        profileVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 2)
+        profileVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "user"), tag: 2)
         
         setViewControllers([homeVC, profileVC], animated: true)
     }

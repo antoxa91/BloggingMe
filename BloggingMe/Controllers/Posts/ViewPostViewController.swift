@@ -37,7 +37,7 @@ final class ViewPostViewController: UITabBarController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sharePostTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "share"), style: .done, target: self, action: #selector(sharePostTapped))
     }
     
     override func viewDidLayoutSubviews() {

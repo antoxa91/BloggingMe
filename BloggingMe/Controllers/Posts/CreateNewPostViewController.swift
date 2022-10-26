@@ -58,10 +58,10 @@ final class CreateNewPostViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "check"), style: .done, target: self, action: #selector(didTapPost))
         textView.delegate = self
 
         setupViews()
-        configureButtons()
         setConstraints()
         
         headerImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapHeader)))
@@ -87,11 +87,6 @@ final class CreateNewPostViewController: UITabBarController {
         picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true)
-    }
-    
-    private func configureButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(didTapPost))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "ButtonBackground")
     }
     
     @objc private func didTapPost() {

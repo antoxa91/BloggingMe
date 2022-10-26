@@ -14,13 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
 
-        let backButtonBackgroundImage = UIImage(named: "back-button")
+        let backButtonBackgroundImage = UIImage(named: "back")
         let barAppearance =
-            UINavigationBar.appearance(whenContainedInInstancesOf: [TabBarController.self])
+        UINavigationBar.appearance(whenContainedInInstancesOf: [TabBarController.self])
         barAppearance.backIndicatorImage = backButtonBackgroundImage
         barAppearance.backIndicatorTransitionMaskImage = backButtonBackgroundImage
         
-        // Nudge the back UIBarButtonItem image down a bit.
         let barButtonAppearance =
             UIBarButtonItem.appearance(whenContainedInInstancesOf: [TabBarController.self])
         barButtonAppearance.setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -5), for: .default)

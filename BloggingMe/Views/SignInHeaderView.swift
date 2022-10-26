@@ -12,6 +12,9 @@ final class SignInHeaderView: UIView {
     private let imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.shadowColor = UIColor(named: "ButtonBackground")!.cgColor
+        imageView.layer.shadowOffset = .init(width: -4, height: -4)
+        imageView.layer.shadowOpacity = 0.5
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
