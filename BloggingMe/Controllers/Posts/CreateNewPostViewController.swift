@@ -58,6 +58,7 @@ final class CreateNewPostViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
+        textView.delegate = self
 
         setupViews()
         configureButtons()
@@ -78,7 +79,6 @@ final class CreateNewPostViewController: UITabBarController {
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         textView.font = .systemFont(ofSize: view.frame.size.width/16)
     }
     
@@ -158,7 +158,6 @@ extension CreateNewPostViewController {
                     headerImageView.layer.cornerRadius = 15
                     headerImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                     headerImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3).isActive = true
-                    self.textView.alpha = 1
                 }
             }
         } else {
@@ -183,6 +182,32 @@ extension CreateNewPostViewController: UIImagePickerControllerDelegate, UINaviga
         
         selectedHeaderImage = image
         headerImageView.image = image
+    }
+}
+
+
+// MARK: - UITextViewDelegate
+extension CreateNewPostViewController: UITextViewDelegate {
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if textView.text == "Start typing..." {
+            textView.selectedRange = NSRange(location: 0, length: 0)
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if textView.text == "Start typing..." {
+            textView.text = ""
+            textView.alpha = 1
+        }
+        return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Start typing..."
+            textView.alpha = 0.4
+        }
     }
 }
 
