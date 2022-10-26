@@ -41,7 +41,6 @@ final class ViewPostViewController: UITabBarController {
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         tableView.frame = view.safeAreaLayoutGuide.layoutFrame
     }
     
