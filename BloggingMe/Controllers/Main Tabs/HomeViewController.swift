@@ -22,6 +22,12 @@ final class HomeViewController: UIViewController {
         return tableView
     }()
     
+    let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchAllPosts), for: .valueChanged)
+        return refreshControl
+    }()
+        
     private let appNameButton: UIButton = {
         let b = UIButton()
         let attributedString = NSMutableAttributedString(string: "BloggingMe", attributes: [.foregroundColor: #colorLiteral(red: 0.01176470588, green: 0.5882352941, blue: 0.8980392157, alpha: 1), .font: UIFont(name: "LobsterTwo-Italic", size: 22) as Any])
@@ -49,6 +55,7 @@ final class HomeViewController: UIViewController {
         configureNavBar()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.addSubview(refreshControl)
         fetchAllPosts()
         setConstraints()
         animateTableView()
@@ -101,11 +108,12 @@ final class HomeViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
-    private func fetchAllPosts(){
+    @objc private func fetchAllPosts(){
         DatabaseManager.shared.getAllPosts { [weak self] posts in
             self?.posts = posts.sorted(by: >)
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.tableView.reloadData()
+                self?.refreshControl.endRefreshing()
             }
         }
     }
@@ -128,7 +136,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         HapticsManager.shared.vibrateForSelection()
-        let vc = ViewPostViewController(post: posts[indexPath.row])
+        let vc = DetailPostVC(post: posts[indexPath.row])
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.title = "Post"
         navigationController?.pushViewController(vc, animated: true)
