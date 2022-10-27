@@ -17,7 +17,6 @@ final class HomeViewController: UIViewController {
         tableView.register(PostPreviewTableViewCell.self,
                            forCellReuseIdentifier: PostPreviewTableViewCell.identifier)
         tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = UIColor(named: "PrimaryBackground")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView

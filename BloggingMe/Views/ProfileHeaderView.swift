@@ -18,6 +18,8 @@ final class ProfileHeaderView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
         imageView.isUserInteractionEnabled = true
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = #colorLiteral(red: 0, green: 0.6885758638, blue: 0.8448309302, alpha: 1)
         return imageView
     }()
     

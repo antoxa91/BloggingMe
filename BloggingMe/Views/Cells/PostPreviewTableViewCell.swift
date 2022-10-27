@@ -17,6 +17,9 @@ final class PostPreviewTableViewCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.shadowColor = UIColor.green.cgColor
+        imageView.layer.shadowOffset = .init(width: 4, height: 4)
+        imageView.layer.shadowOpacity = 0.9
         return imageView
     }()
     
@@ -33,7 +36,9 @@ final class PostPreviewTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(postImageView)
         contentView.addSubview(postTitleLabel)
-        backgroundColor = UIColor(named: "PrimaryBackground")
+        backgroundColor = UIColor(named: "CellBackground")
+        layer.cornerRadius = 20
+        layer.borderWidth = 5
     }
     
     required init?(coder: NSCoder) {
@@ -42,8 +47,11 @@ final class PostPreviewTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+
         postTitleLabel.font = .systemFont(ofSize: frame.size.width/21, weight: .medium)
         setConstraints()
+        layer.borderColor = UIColor(named: "PrimaryBackground")!.cgColor
+
     }
     
     override func prepareForReuse() {
@@ -74,8 +82,8 @@ final class PostPreviewTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             postImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             postImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            postImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9),
-            postImageView.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 1.1),
+            postImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.75),
+            postImageView.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9),
             
             postTitleLabel.leadingAnchor.constraint(equalTo: postImageView.trailingAnchor, constant: 10),
             postTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
