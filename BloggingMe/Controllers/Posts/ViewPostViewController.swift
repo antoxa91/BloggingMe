@@ -69,7 +69,7 @@ extension ViewPostViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.textAlignment = .center
-            cell.textLabel?.font = .systemFont(ofSize: view.frame.size.width/20, weight: .bold)
+            cell.textLabel?.font = UIFont(name: "OpenSans-SemiBold", size: view.frame.size.width/17)
             cell.textLabel?.text = post.title
             return cell
         case 1:
@@ -80,6 +80,7 @@ extension ViewPostViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.selectionStyle = .none
             cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.font = UIFont(name: "OpenSans-Regular", size: view.frame.size.width/19)
             cell.textLabel?.text = post.text
             return cell
         default:

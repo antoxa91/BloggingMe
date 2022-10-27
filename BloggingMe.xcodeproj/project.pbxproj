@@ -12,6 +12,10 @@
 		C525381E28F96F5200264261 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C525381D28F96F5200264261 /* ProfileHeaderView.swift */; };
 		C5478D3B28EF1678001D0A74 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5478D3A28EF1678001D0A74 /* User.swift */; };
 		C5478D3D28EF1687001D0A74 /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5478D3C28EF1687001D0A74 /* BlogPost.swift */; };
+		C55F4ACB290AA070005C69D4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C55F4AC5290A9B93005C69D4 /* OpenSans-Regular.ttf */; };
+		C55F4ACC290AA074005C69D4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C55F4AC7290A9DA7005C69D4 /* OpenSans-SemiBold.ttf */; };
+		C55F4ACD290AA077005C69D4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C55F4AC9290A9E2D005C69D4 /* OpenSans-Bold.ttf */; };
+		C55F4AD0290AA5B6005C69D4 /* LobsterTwo-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C55F4ACE290AA549005C69D4 /* LobsterTwo-Italic.ttf */; };
 		C56CA84E28F548E9003EA427 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C56CA84D28F548E9003EA427 /* GoogleService-Info.plist */; };
 		C58C307228EEEC160099ACD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C307128EEEC160099ACD7 /* AppDelegate.swift */; };
 		C58C307428EEEC160099ACD7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C307328EEEC160099ACD7 /* SceneDelegate.swift */; };
@@ -43,6 +47,10 @@
 		C525381D28F96F5200264261 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		C5478D3A28EF1678001D0A74 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C5478D3C28EF1687001D0A74 /* BlogPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
+		C55F4AC5290A9B93005C69D4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		C55F4AC7290A9DA7005C69D4 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		C55F4AC9290A9E2D005C69D4 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		C55F4ACE290AA549005C69D4 /* LobsterTwo-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LobsterTwo-Italic.ttf"; sourceTree = "<group>"; };
 		C56CA84D28F548E9003EA427 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C58C306E28EEEC160099ACD7 /* BloggingMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloggingMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58C307128EEEC160099ACD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +96,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C55F4AC4290A9B2D005C69D4 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C55F4AC5290A9B93005C69D4 /* OpenSans-Regular.ttf */,
+				C55F4AC7290A9DA7005C69D4 /* OpenSans-SemiBold.ttf */,
+				C55F4AC9290A9E2D005C69D4 /* OpenSans-Bold.ttf */,
+				C55F4ACE290AA549005C69D4 /* LobsterTwo-Italic.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		C58C306528EEEC160099ACD7 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +128,7 @@
 		C58C307028EEEC160099ACD7 /* BloggingMe */ = {
 			isa = PBXGroup;
 			children = (
+				C55F4AC4290A9B2D005C69D4 /* fonts */,
 				C58C308928EEF1A40099ACD7 /* Application */,
 				C58C308828EEF1930099ACD7 /* Managers */,
 				C58C308528EEF1760099ACD7 /* Controllers */,
@@ -288,8 +308,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C55F4ACB290AA070005C69D4 /* OpenSans-Regular.ttf in Resources */,
+				C55F4AD0290AA5B6005C69D4 /* LobsterTwo-Italic.ttf in Resources */,
+				C55F4ACD290AA077005C69D4 /* OpenSans-Bold.ttf in Resources */,
 				C58C307E28EEEC170099ACD7 /* LaunchScreen.storyboard in Resources */,
 				C58C307B28EEEC170099ACD7 /* Assets.xcassets in Resources */,
+				C55F4ACC290AA074005C69D4 /* OpenSans-SemiBold.ttf in Resources */,
 				C56CA84E28F548E9003EA427 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

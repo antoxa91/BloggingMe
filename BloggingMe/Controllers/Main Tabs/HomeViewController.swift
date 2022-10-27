@@ -24,7 +24,7 @@ final class HomeViewController: UIViewController {
     
     private let appNameButton: UIButton = {
         let b = UIButton()
-        let attributedString = NSMutableAttributedString(string: "BloggingMe", attributes: [.foregroundColor: #colorLiteral(red: 0.01176470588, green: 0.5882352941, blue: 0.8980392157, alpha: 1), .font: UIFont(name: "Cochin Bold Italic", size: 22) as Any])
+        let attributedString = NSMutableAttributedString(string: "BloggingMe", attributes: [.foregroundColor: #colorLiteral(red: 0.01176470588, green: 0.5882352941, blue: 0.8980392157, alpha: 1), .font: UIFont(name: "LobsterTwo-Italic", size: 22) as Any])
         b.setAttributedTitle(attributedString, for: .normal)
         b.layer.shadowColor = UIColor(named: "ButtonBackground")?.cgColor
         b.layer.shadowOffset = .init(width: 1, height: 4)

@@ -52,7 +52,7 @@ final class ProfileHeaderView: UIView {
         super.layoutSubviews()
         gradient.frame = self.bounds
         profilePhoto.layer.cornerRadius = profilePhoto.frame.size.width/2
-        emailLabel.font = UIFont(name: "Avenir Black", size: frame.width/20)
+        emailLabel.font = UIFont(name: "Apple SD Gothic Neo Regular", size: frame.width/20)
     }
     
     private func setupGradientView(){

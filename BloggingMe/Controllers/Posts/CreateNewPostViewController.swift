@@ -79,7 +79,8 @@ final class CreateNewPostViewController: UITabBarController {
     }
     
     override func viewDidLayoutSubviews() {
-        textView.font = .systemFont(ofSize: view.frame.size.width/16)
+        titleField.font = UIFont(name: "OpenSans-SemiBold", size: view.frame.size.width/17)
+        textView.font = UIFont(name: "OpenSans-Regular", size: view.frame.size.width/19)
     }
     
     @objc private func didTapHeader() {
