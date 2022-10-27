@@ -1,5 +1,5 @@
 //
-//  ViewPostViewController.swift
+//  DetailPostVC.swift
 //  BloggingMe
 //
 //  Created by Антон Стафеев on 06.10.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewPostViewController: UITabBarController {
+final class DetailPostVC: UITabBarController {
     
     private let post: BlogPost
     
@@ -57,7 +57,7 @@ final class ViewPostViewController: UITabBarController {
 
 
 // MARK: - UITableViewDataSource
-extension ViewPostViewController: UITableViewDataSource {
+extension DetailPostVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -91,7 +91,7 @@ extension ViewPostViewController: UITableViewDataSource {
 
 
 // MARK: - UITableViewDelegate
-extension ViewPostViewController: UITableViewDelegate {
+extension DetailPostVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 1:

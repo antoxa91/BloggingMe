@@ -10,7 +10,7 @@ import UIKit
 final class SignInHeaderView: UIView {
     
     private let imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "logo"))
+        let imageView = UIImageView(image: UIImage(named: "AppLogo"))
         imageView.contentMode = .scaleAspectFit
         imageView.layer.shadowColor = UIColor(named: "ButtonBackground")!.cgColor
         imageView.layer.shadowOffset = .init(width: -4, height: -4)
@@ -47,7 +47,7 @@ final class SignInHeaderView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        label.font = .systemFont(ofSize: frame.width/20, weight: .medium)
+        label.font = UIFont(name: "OpenSans-SemiBold", size: frame.width/20)
     }
     
     private func setConstraints() {
