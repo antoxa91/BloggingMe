@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ShimmerSwift
 
 final class DetailPostVC: UITabBarController {
     
@@ -27,21 +28,49 @@ final class DetailPostVC: UITabBarController {
                        forCellReuseIdentifier: PostHeaderTableViewCell.identifier)
         table.separatorStyle = .none
         table.bounces = false
-        table.translatesAutoresizingMaskIntoConstraints = false
         return table
+    }()
+    
+    private let appNameLabel: UILabel = {
+        let label = UILabel()
+        let attributedString = NSMutableAttributedString(string: "BloggingMe", attributes: [.foregroundColor: #colorLiteral(red: 0.01176470588, green: 0.5882352941, blue: 0.8980392157, alpha: 1), .font: UIFont(name: "LobsterTwo-Italic", size: 22) as Any])
+        label.attributedText = attributedString
+        label.layer.shadowColor = UIColor(named: "ButtonBackground")?.cgColor
+        label.layer.shadowOffset = .init(width: 1, height: 4)
+        label.layer.shadowOpacity = 0.5
+        return label
+    }()
+    
+    private let shimmerView: ShimmeringView = {
+        let shimmer = ShimmeringView()
+        shimmer.isShimmering = true
+        shimmer.shimmerSpeed = 20
+        shimmer.shimmerAnimationOpacity = 0.4
+        return shimmer
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
         view.addSubview(tableView)
+        
         tableView.delegate = self
         tableView.dataSource = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "share"), style: .done, target: self, action: #selector(sharePostTapped))
+        configureNavBar()
     }
     
     override func viewDidLayoutSubviews() {
         tableView.frame = view.safeAreaLayoutGuide.layoutFrame
+        shimmerView.frame = appNameLabel.frame
+    }
+    
+    private func configureNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "share"), style: .done, target: self, action: #selector(sharePostTapped))
+
+        navigationItem.titleView = appNameLabel
+        navigationController?.navigationItem.titleView?.addSubview(shimmerView)
+        shimmerView.center = appNameLabel.center
+        shimmerView.contentView = appNameLabel
     }
     
     @objc private func sharePostTapped() {
