@@ -1,5 +1,5 @@
 //
-//  CreateNewPostViewController.swift
+//  CreateNewPostVC.swift
 //  BloggingMe
 //
 //  Created by Антон Стафеев on 06.10.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CreateNewPostViewController: UITabBarController {
+final class CreateNewPostVC: UITabBarController {
     
     private let titleField: UITextField = {
         let field = UITextField()
@@ -142,7 +142,7 @@ final class CreateNewPostViewController: UITabBarController {
 
 
 // MARK: - Adjust For Keyboard
-extension CreateNewPostViewController {
+extension CreateNewPostVC {
     @objc private func hideKeyboard() {
         self.view.endEditing(true)
     }
@@ -170,7 +170,7 @@ extension CreateNewPostViewController {
 
 
 // MARK: - UIImagePickerControllerDelegate
-extension CreateNewPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension CreateNewPostVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
@@ -183,7 +183,7 @@ extension CreateNewPostViewController: UIImagePickerControllerDelegate, UINaviga
 
 
 // MARK: - UITextViewDelegate
-extension CreateNewPostViewController: UITextViewDelegate {
+extension CreateNewPostVC: UITextViewDelegate {
     
     func textViewDidChangeSelection(_ textView: UITextView) {
         if textView.text == "Start typing..." {
@@ -209,7 +209,7 @@ extension CreateNewPostViewController: UITextViewDelegate {
 
 
 // MARK: - Constraints
-extension CreateNewPostViewController {
+extension CreateNewPostVC {
     private func setConstraints() {
         NSLayoutConstraint.activate([
             titleField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

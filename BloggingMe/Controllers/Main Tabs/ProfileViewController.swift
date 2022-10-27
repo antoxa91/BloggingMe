@@ -87,7 +87,6 @@ extension ProfileViewController: UITableViewDelegate {
         HapticsManager.shared.vibrateForSelection()
         let vc = DetailPostVC(post: posts[indexPath.row])
         vc.navigationItem.largeTitleDisplayMode = .never
-        vc.title = "Post"
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -77,7 +77,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc private func didTapCreate() {
-        let vc = CreateNewPostViewController()
+        let vc = CreateNewPostVC()
         vc.title = "Create Post"
         let navVC = UINavigationController(rootViewController: vc)
         navVC.sheetPresentationController?.prefersGrabberVisible = true
@@ -138,7 +138,6 @@ extension HomeViewController: UITableViewDelegate {
         HapticsManager.shared.vibrateForSelection()
         let vc = DetailPostVC(post: posts[indexPath.row])
         vc.navigationItem.largeTitleDisplayMode = .never
-        vc.title = "Post"
         navigationController?.pushViewController(vc, animated: true)
     }
     
