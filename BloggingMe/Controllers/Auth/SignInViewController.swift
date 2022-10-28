@@ -60,6 +60,7 @@ final class SignInViewController: UIViewController {
         super.viewDidLoad()
         title = "Sign In"
         view.backgroundColor = UIColor(named: "PrimaryBackground")
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         setupViews()
         setConstraints()
         setButtonTargets()
@@ -87,10 +88,10 @@ final class SignInViewController: UIViewController {
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
             signInButton.animateError()
+            HapticsManager.shared.vibrate(for: .error)
             return
         }
         
-        HapticsManager.shared.vibrateForSelection()
         
         AuthManager.shared.singIn(email: email, password: password) { [weak self] success in
             self?.signInButton.configuration?.showsActivityIndicator = true
@@ -101,6 +102,7 @@ final class SignInViewController: UIViewController {
                 let vc = TabBarController()
                 vc.modalPresentationStyle = .fullScreen
                 self?.present(vc, animated: true)
+                HapticsManager.shared.vibrate(for: .success)
             }
             UserDefaults.standard.set(email, forKey: "email")
         }
@@ -111,6 +113,10 @@ final class SignInViewController: UIViewController {
         vc.title = "Create Account"
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func hideKeyboard() {
+        self.view.endEditing(true)
     }
 }
 

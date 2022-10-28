@@ -48,7 +48,7 @@ final class PostPreviewTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        postTitleLabel.font = UIFont(name: "OpenSans-SemiBold", size: frame.size.width/20)
+        postTitleLabel.font = UIFont(name: "OpenSans-SemiBold", size: frame.size.width/22)
         setConstraints()
         layer.borderColor = UIColor(named: "PrimaryBackground")!.cgColor
 

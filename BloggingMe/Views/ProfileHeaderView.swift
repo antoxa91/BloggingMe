@@ -79,7 +79,7 @@ extension ProfileHeaderView {
             profilePhoto.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.44),
             profilePhoto.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.44),
 
-            emailLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.32),
+            emailLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
             emailLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             emailLabel.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -5),
             emailLabel.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.05)
