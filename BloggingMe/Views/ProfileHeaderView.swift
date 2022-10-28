@@ -23,11 +23,12 @@ final class ProfileHeaderView: UIView {
         return imageView
     }()
     
+    
     let emailLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.alpha = 0.7
         return label
     }()
     
@@ -52,7 +53,7 @@ final class ProfileHeaderView: UIView {
         super.layoutSubviews()
         gradient.frame = self.bounds
         profilePhoto.layer.cornerRadius = profilePhoto.frame.size.width/2
-        emailLabel.font = UIFont(name: "Apple SD Gothic Neo Regular", size: frame.width/20)
+        emailLabel.font = UIFont(name: "OpenSans-SemiBold", size: frame.size.width / 23)
     }
     
     private func setupGradientView(){
@@ -74,12 +75,14 @@ extension ProfileHeaderView {
     private func setConstraints() {
         NSLayoutConstraint.activate([
             profilePhoto.centerXAnchor.constraint(equalTo: centerXAnchor),
-            profilePhoto.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -10),
-            profilePhoto.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
-            profilePhoto.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
-            
+            profilePhoto.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -11),
+            profilePhoto.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.44),
+            profilePhoto.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.44),
+
+            emailLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.32),
             emailLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            emailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+            emailLabel.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -5),
+            emailLabel.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.05)
         ])
     }
 }

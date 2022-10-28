@@ -139,7 +139,8 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        currentEmail
+        return "Total Posts: \(posts.count)"
+        //currentEmail
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -171,7 +172,7 @@ extension ProfileViewController {
         tableView.tableHeaderView = myHeaderView
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapProfilePhoto))
         myHeaderView.profilePhoto.addGestureRecognizer(tap)
-        myHeaderView.myPostNumberLabel.text = "\(posts.count)"
+        myHeaderView.emailLabel.text = currentEmail
 
         if name != nil {
             title = name
@@ -246,7 +247,7 @@ extension ProfileViewController {
     func setConstraints() {
         NSLayoutConstraint.activate([
             myHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            myHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.30),
+            myHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.28),
             
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
