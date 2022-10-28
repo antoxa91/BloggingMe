@@ -12,6 +12,9 @@ final class ProfileViewController: UIViewController {
     private var user: User?
     private var posts: [BlogPost] = []
     
+    private var changeThemeButton: UIBarButtonItem!
+    var isDarkModeOn = true
+
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(PostPreviewTableViewCell.self,
@@ -39,19 +42,27 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
-        navigationItem.backButtonDisplayMode = .minimal
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "signOut"), style: .done, target: self, action: #selector(didTapSignOut))
+        setupNavBar()
         setupTable()
         fetchPosts()
     }
     
-    private func setupTable() {
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        setupTableHeader()
-        fetchProfileData()
-        setConstraints()
+    private func setupNavBar() {
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "signOut"), style: .done, target: self, action: #selector(didTapSignOut))
+        
+        changeThemeButton = UIBarButtonItem(image: UIImage(named: "moon"), style: .done, target: self, action: #selector(changeThemeTapped))
+        navigationItem.leftBarButtonItem = changeThemeButton
+    }
+    
+    @objc private func changeThemeTapped() {
+        UIView.transition (with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.overrideUserInterfaceStyle = self.isDarkModeOn ? .dark : .light
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            windowScene?.windows.first?.overrideUserInterfaceStyle = self.overrideUserInterfaceStyle
+            self.changeThemeButton.image = self.isDarkModeOn ? UIImage(named: "sun") : UIImage(named: "moon")
+            self.isDarkModeOn.toggle()
+        })
     }
     
     @objc private func didTapSignOut() {
@@ -76,6 +87,15 @@ final class ProfileViewController: UIViewController {
             }
         }))
         present(ac, animated: true)
+    }
+    
+    private func setupTable() {
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        setupTableHeader()
+        fetchProfileData()
+        setConstraints()
     }
 }
 
@@ -119,7 +139,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "My Posts"
+        currentEmail
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
