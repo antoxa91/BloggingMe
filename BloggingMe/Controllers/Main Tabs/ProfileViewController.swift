@@ -169,10 +169,9 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController {
     private func setupTableHeader(profilePhotoRef: String? = nil, name: String? = nil) {
         tableView.tableHeaderView = myHeaderView
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapProfilePhoto))
         myHeaderView.profilePhoto.addGestureRecognizer(tap)
-        myHeaderView.emailLabel.text = currentEmail
+        myHeaderView.myPostNumberLabel.text = "\(posts.count)"
 
         if name != nil {
             title = name
