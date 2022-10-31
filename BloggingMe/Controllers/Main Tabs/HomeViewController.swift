@@ -81,6 +81,7 @@ final class HomeViewController: UIViewController {
         vc.title = "Create Post"
         let navVC = UINavigationController(rootViewController: vc)
         navVC.sheetPresentationController?.prefersGrabberVisible = true
+        navVC.sheetPresentationController?.preferredCornerRadius = 30
         present(navVC, animated: true)
     }
     
