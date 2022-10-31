@@ -65,7 +65,7 @@ final class DetailPostVC: UITabBarController {
     }
     
     private func configureNavBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "share"), style: .done, target: self, action: #selector(sharePostTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "share"), style: .done, target: self, action: #selector(shareImageTapped))
 
         navigationItem.titleView = appNameLabel
         navigationController?.navigationItem.titleView?.addSubview(shimmerView)
@@ -73,7 +73,7 @@ final class DetailPostVC: UITabBarController {
         shimmerView.contentView = appNameLabel
     }
     
-    @objc private func sharePostTapped() {
+    @objc private func shareImageTapped() {
         guard let imageUrl = post.headerImageUrl else { return }
         
         if let data = try? Data(contentsOf: imageUrl) {
