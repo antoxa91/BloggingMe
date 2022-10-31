@@ -80,6 +80,7 @@ final class SignUpViewController: UIViewController {
         setupViews()
         setConstraints()
         signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
     
     private func setupViews() {
@@ -90,6 +91,10 @@ final class SignUpViewController: UIViewController {
         stackView.distribution = .fillEqually
         stackView.spacing = view.frame.size.height * 0.01
         view.addSubview(stackView)
+    }
+    
+    @objc private func hideKeyboard() {
+        self.view.endEditing(true)
     }
     
     @objc private func didTapSignUp() {

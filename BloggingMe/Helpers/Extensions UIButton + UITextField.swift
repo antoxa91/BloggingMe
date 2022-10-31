@@ -34,6 +34,15 @@ extension UITextField {
         leftViewMode = .always
         self.tintColor = .lightGray
     }
+    
+    func addDoneButton() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.resignFirstResponder))
+        toolbar.items = [flexibleSpace, doneButton]
+        self.inputAccessoryView = toolbar
+    }
 }
 
 
@@ -45,5 +54,16 @@ extension UIButton {
             self.transform = .identity
             self.alpha = 1
         })
+    }
+}
+
+extension UITextView {
+    func addDoneButton() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.resignFirstResponder))
+        toolbar.items = [flexibleSpace, doneButton]
+        self.inputAccessoryView = toolbar
     }
 }

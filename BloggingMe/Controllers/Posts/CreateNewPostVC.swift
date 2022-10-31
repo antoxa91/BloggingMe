@@ -17,6 +17,7 @@ final class CreateNewPostVC: UITabBarController {
         field.autocapitalizationType = .words
         field.autocorrectionType = .yes
         field.textAlignment = .center
+        field.addDoneButton()
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
@@ -40,6 +41,7 @@ final class CreateNewPostVC: UITabBarController {
         textView.text = "Start typing..."
         textView.alpha = 0.4
         textView.layer.cornerRadius = 15
+        textView.addDoneButton()
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -58,12 +60,12 @@ final class CreateNewPostVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryBackground")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapCloseVC))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "check"), style: .done, target: self, action: #selector(didTapPost))
+        
         textView.delegate = self
-
         setupViews()
         setConstraints()
-        
         headerImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapHeader)))
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
@@ -88,6 +90,10 @@ final class CreateNewPostVC: UITabBarController {
         picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true)
+    }
+    
+    @objc private func didTapCloseVC() {
+        self.dismiss(animated: true)
     }
     
     @objc private func didTapPost() {
