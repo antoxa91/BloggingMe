@@ -48,7 +48,9 @@ final class PostHeaderTableViewCell: UITableViewCell {
                 
                 viewModel.imageData = data
                 DispatchQueue.main.async {
-                    self?.postImageView.image = UIImage(data: data)
+                    UIView.transition(with: self?.postImageView ?? UIImageView(), duration: 0.3, options: [.curveEaseOut, .transitionCrossDissolve]) {
+                        self?.postImageView.image = UIImage(data: data)
+                    }
                 }
             }
             task.resume()

@@ -66,12 +66,15 @@ final class PostPreviewTableViewCell: UITableViewCell {
         if let data = viewModel.imageData {
             postImageView.image = UIImage(data: data)
         } else if let url = viewModel.imageUrl {
-            let task = URLSession.shared.dataTask(with: url) {[weak self] data, _, _ in
+            let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
                 guard let data = data else { return }
                 
                 viewModel.imageData = data
+                
                 DispatchQueue.main.async {
-                    self?.postImageView.image = UIImage(data: data)
+                    UIView.transition(with: self?.postImageView ?? UIImageView(), duration: 0.9, options: [.curveEaseOut, .transitionCrossDissolve]) {
+                        self?.postImageView.image = UIImage(data: data)
+                    }
                 }
             }
             task.resume()

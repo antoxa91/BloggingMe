@@ -14,7 +14,7 @@ final class ProfileViewController: UIViewController {
     
     private var changeThemeButton: UIBarButtonItem!
     var isDarkModeOn = true
-
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(PostPreviewTableViewCell.self,
@@ -49,10 +49,18 @@ final class ProfileViewController: UIViewController {
     
     private func setupNavBar() {
         navigationItem.backButtonDisplayMode = .minimal
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "signOut"), style: .done, target: self, action: #selector(didTapSignOut))
-        
         changeThemeButton = UIBarButtonItem(image: UIImage(named: "moon"), style: .done, target: self, action: #selector(changeThemeTapped))
         navigationItem.leftBarButtonItem = changeThemeButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "setting"), menu: profileSettingsTapped())
+    }
+
+    private func setupTable() {
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        setupTableHeader()
+        fetchProfileData()
+        setConstraints()
     }
     
     @objc private func changeThemeTapped() {
@@ -65,37 +73,67 @@ final class ProfileViewController: UIViewController {
         })
     }
     
-    @objc private func didTapSignOut() {
-        let ac = UIAlertController(title: "Sign Out", message: "Are you sure you'd like to sign out?", preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        ac.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
-            AuthManager.shared.singOut { [weak self] success in
-                if success {
-                    DispatchQueue.main.async {
-                        UserDefaults.standard.set(nil, forKey: "email")
-                        UserDefaults.standard.set(nil, forKey: "name")
-                        
-                        let signVC = SignInViewController()
-                        signVC.navigationItem.largeTitleDisplayMode = .always
-                        
-                        let navVC = UINavigationController(rootViewController: signVC)
-                        navVC.navigationBar.prefersLargeTitles = true
-                        navVC.modalPresentationStyle = .fullScreen
-                        self?.present(navVC, animated: true)
-                    }
-                }
+    // MARK: - Profile Settings Tapped
+    private func profileSettingsTapped() -> UIMenu {
+        let changePhoto = UIAction(title: "Change Photo", image: UIImage(named: "photos")) { [weak self] _ in
+            //убедиться что меняем свою именно почту
+            guard let myEmail = UserDefaults.standard.string(forKey: "email"),
+                  myEmail == self?.currentEmail else { return }
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
+            self?.present(picker, animated: true)
+        }
+        
+        let changeName = UIAction(title: "Change Name", image: UIImage(named: "pencil")) { [weak self] _ in
+            let ac = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .alert)
+            ac.addTextField() { tf in
+                tf.placeholder = "Enter New Name"
+                tf.setupLeftImage(imageViewNamed: "person")
             }
-        }))
-        present(ac, animated: true)
-    }
-    
-    private func setupTable() {
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        setupTableHeader()
-        fetchProfileData()
-        setConstraints()
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            ac.addAction(UIAlertAction(title: "OK", style: .default) {_ in
+                guard let tf = ac.textFields else { return }
+                guard let newName = tf[0].text, !newName.isEmpty, newName != self?.title else {
+                    return
+                }
+                
+                guard let currentEmail = self?.currentEmail else { return }
+                DatabaseManager.shared.updateProfileName(email: currentEmail, newName: newName) { success in
+                    guard success else { return }
+                }
+                self?.title = newName
+            })
+            self?.present(ac, animated: true)
+            UserDefaults.standard.set(self?.user?.name, forKey: "name")
+        }
+        
+        let signOut = UIAction(title: "Sign Out", image: UIImage(named: "signOut")) { [weak self] _ in
+                let ac = UIAlertController(title: "Sign Out", message: "Are you sure you'd like to sign out?", preferredStyle: .actionSheet)
+                ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                ac.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
+                    AuthManager.shared.signOut { [weak self] success in
+                        if success {
+                            DispatchQueue.main.async {
+                                UserDefaults.standard.set(nil, forKey: "email")
+                                UserDefaults.standard.set(nil, forKey: "name")
+                                
+                                let signVC = SignInViewController()
+                                signVC.navigationItem.largeTitleDisplayMode = .always
+                                
+                                let navVC = UINavigationController(rootViewController: signVC)
+                                navVC.navigationBar.prefersLargeTitles = true
+                                navVC.modalPresentationStyle = .fullScreen
+                                self?.present(navVC, animated: true)
+                            }
+                        }
+                    }
+                }))
+                self?.present(ac, animated: true)
+            }
+        
+        let menu = UIMenu(title: "Settings", image: nil, children: [changePhoto, changeName, signOut])
+        return menu
     }
 }
 
@@ -140,7 +178,6 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Total Posts: \(posts.count)"
-        //currentEmail
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -170,8 +207,6 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController {
     private func setupTableHeader(profilePhotoRef: String? = nil, name: String? = nil) {
         tableView.tableHeaderView = myHeaderView
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapProfilePhoto))
-        myHeaderView.profilePhoto.addGestureRecognizer(tap)
         myHeaderView.emailLabel.text = currentEmail
 
         if name != nil {
@@ -185,21 +220,13 @@ extension ProfileViewController {
                 URLSession.shared.dataTask(with: url) { data, _, _ in
                     guard let data = data else { return }
                     DispatchQueue.main.async {
-                        self.myHeaderView.profilePhoto.image = UIImage(data: data)
+                        UIView.transition (with: self.myHeaderView.profilePhoto, duration: 0.5, options: [.curveEaseOut, .transitionCrossDissolve], animations: {
+                            self.myHeaderView.profilePhoto.image = UIImage(data: data)
+                        })
                     }
                 }.resume()
             }
         }
-    }
-    
-    @objc private func didTapProfilePhoto() {
-        // чтобы менять фото профиля только у себя
-        guard let myEmail = UserDefaults.standard.string(forKey: "email"),
-              myEmail == currentEmail else { return }
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        present(picker, animated: true)
     }
     
     private func fetchProfileData() {
