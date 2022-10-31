@@ -12,7 +12,7 @@ final class DatabaseManager {
     
     static let shared = DatabaseManager()
     
-    private let database = Firestore.firestore()
+    let database = Firestore.firestore()
     private init() {}
     
     public func insertPost(blogPost: BlogPost, email: String, completion: @escaping(Bool) -> Void) {
@@ -176,5 +176,15 @@ final class DatabaseManager {
                     completion(true)
                 }
             }
+    }
+    
+    public func updateProfileName(email: String, newName: String, completion: @escaping (Bool) -> Void) {
+        let path = StorageManager.userEmail(email)
+        
+        let databaseRef = database
+            .collection("users")
+            .document(path)
+        
+        databaseRef.updateData(["name": newName])
     }
 }
