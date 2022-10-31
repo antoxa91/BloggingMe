@@ -53,7 +53,7 @@ final class AuthManager {
         }
     }
     
-    public func singOut(completion: @escaping (Bool) -> Void) {
+    public func signOut(completion: @escaping (Bool) -> Void) {
         do {
             try auth.signOut()
             completion(true)
