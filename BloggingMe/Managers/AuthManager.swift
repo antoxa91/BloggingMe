@@ -33,7 +33,6 @@ final class AuthManager {
                 completion(false)
                 return
             }
-            //Account created
             completion(true)
         }
     }

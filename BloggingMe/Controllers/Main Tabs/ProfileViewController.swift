@@ -76,7 +76,6 @@ final class ProfileViewController: UIViewController {
     // MARK: - Profile Settings Tapped
     private func profileSettingsTapped() -> UIMenu {
         let changePhoto = UIAction(title: "Change Photo", image: UIImage(named: "photos")) { [weak self] _ in
-            //убедиться что меняем свою именно почту
             guard let myEmail = UserDefaults.standard.string(forKey: "email"),
                   myEmail == self?.currentEmail else { return }
             let picker = UIImagePickerController()
@@ -271,7 +270,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 // MARK: - Constraints
 extension ProfileViewController {
-    func setConstraints() {
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             myHeaderView.widthAnchor.constraint(equalTo: view.widthAnchor),
             myHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.28),

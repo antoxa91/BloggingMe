@@ -98,16 +98,16 @@ final class SignUpViewController: UIViewController {
     }
     
     @objc private func didTapSignUp() {
+        #warning("Проработать регистрацию с левой почты")
         guard let email = emailField.text, !email.isEmpty,
               let password = createPasswordField.text, !password.isEmpty, createPasswordField.text == confirmPasswordField.text,
               let name = nameField.text, !name.isEmpty else {
             signUpButton.animateError()
             return
         }
-        //create user
+        
         AuthManager.shared.singUp(email: email, password: password) { [weak self] success in
             if success {
-                // Update database
                 let newUser = User(name: name, email: email, profilePictureRef: nil)
                 DatabaseManager.shared.insertUser(newUser) { inserted in
                     guard inserted else {

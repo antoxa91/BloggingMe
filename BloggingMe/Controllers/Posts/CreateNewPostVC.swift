@@ -190,7 +190,6 @@ extension CreateNewPostVC: UIImagePickerControllerDelegate, UINavigationControll
 
 // MARK: - UITextViewDelegate
 extension CreateNewPostVC: UITextViewDelegate {
-    
     func textViewDidChangeSelection(_ textView: UITextView) {
         if textView.text == "Start typing..." {
             textView.selectedRange = NSRange(location: 0, length: 0)
