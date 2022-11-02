@@ -84,7 +84,7 @@ final class SignInViewController: UIViewController {
     
     
     @objc private func didTapSignIn() {
-        #warning("Проработать вход с левой почты")
+#error("Проработать вход с левой почты")
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
             signInButton.animateError()

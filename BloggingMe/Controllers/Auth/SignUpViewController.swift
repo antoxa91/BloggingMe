@@ -98,7 +98,7 @@ final class SignUpViewController: UIViewController {
     }
     
     @objc private func didTapSignUp() {
-        #warning("Проработать регистрацию с левой почты")
+        #error("Регистр с левой почты")
         guard let email = emailField.text, !email.isEmpty,
               let password = createPasswordField.text, !password.isEmpty, createPasswordField.text == confirmPasswordField.text,
               let name = nameField.text, !name.isEmpty else {

@@ -23,7 +23,7 @@ final class SignInHeaderView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = "Explore millions of articles!"
+        label.text = "Enjoy millions of articles!"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
