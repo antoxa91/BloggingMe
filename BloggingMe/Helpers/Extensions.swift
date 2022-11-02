@@ -45,7 +45,7 @@ extension UITextField {
     }
 }
 
-
+// MARK: - UIButton
 extension UIButton {
     func animateError() {
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 10, animations: {
@@ -57,6 +57,7 @@ extension UIButton {
     }
 }
 
+// MARK: - UITextView
 extension UITextView {
     func addDoneButton() {
         let toolbar = UIToolbar()

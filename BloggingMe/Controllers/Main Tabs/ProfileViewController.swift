@@ -162,7 +162,7 @@ extension ProfileViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
-    @objc private func fetchPosts(){
+    @objc private func fetchPosts() {
         DatabaseManager.shared.getUserPosts(for: currentEmail) {[weak self] posts in
             self?.posts = posts.sorted(by: >)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

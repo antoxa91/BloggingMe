@@ -51,7 +51,6 @@ final class PostPreviewTableViewCell: UITableViewCell {
         postTitleLabel.font = UIFont(name: "OpenSans-SemiBold", size: frame.size.width/22)
         setConstraints()
         layer.borderColor = UIColor(named: "PrimaryBackground")!.cgColor
-
     }
     
     override func prepareForReuse() {
