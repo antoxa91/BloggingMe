@@ -26,6 +26,12 @@ final class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchPosts), for: .valueChanged)
+        return refreshControl
+    }()
+    
     private let myHeaderView = ProfileHeaderView()
     
     let currentEmail: String
@@ -58,6 +64,7 @@ final class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.addSubview(refreshControl)
         setupTableHeader()
         fetchProfileData()
         setConstraints()
@@ -155,11 +162,12 @@ extension ProfileViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
-    private func fetchPosts(){
+    @objc private func fetchPosts(){
         DatabaseManager.shared.getUserPosts(for: currentEmail) {[weak self] posts in
             self?.posts = posts.sorted(by: >)
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.tableView.reloadData()
+                self?.refreshControl.endRefreshing()
             }
         }
     }
