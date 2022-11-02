@@ -12,7 +12,7 @@ Firebase Firestore  is used to store information about the users and their posts
 
 :white_check_mark: You can change your account name or profile picture.
 
-:white_check_mark: Custom TabBar, Navigation Buttons, Fonts
+:white_check_mark: Custom TabBar, Navigation Buttons, Fonts, Colors.
 
 :white_check_mark: Vibrate for selection.
 
