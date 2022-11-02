@@ -37,7 +37,13 @@ Firebase Firestore  is used to store information about the users and their posts
 ### Screen Recording
 
 ___
+![signInError](https://user-images.githubusercontent.com/69522563/199493974-98570596-86c5-48ea-9691-6f8f6dd0d69e.gif)
+![SignUPVC](https://user-images.githubusercontent.com/69522563/199494014-6809d655-41d4-4fdf-ae82-e970067767a4.png)
 
+![home+detail](https://user-images.githubusercontent.com/69522563/199494042-caea057c-69c3-4a71-ab80-0639ed2370b9.gif)
+![createPost](https://user-images.githubusercontent.com/69522563/199494076-74628721-eaf3-439e-ab14-251a07f6f191.gif)
+
+![Profile](https://user-images.githubusercontent.com/69522563/199494090-a441870e-8738-4e36-86a6-86d0c5e4d83f.gif)
 
 
 ### Installation
