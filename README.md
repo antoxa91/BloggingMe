@@ -22,6 +22,8 @@ Firebase Firestore  is used to store information about the users and their posts
 
 :white_check_mark: Dark mode supported. 
 
+:heavy_minus_sign: Checking if an email exists not supported yet
+
 + UIKit
 + UITableView
 + UIImagePickerController
