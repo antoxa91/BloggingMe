@@ -91,19 +91,20 @@ final class ProfileViewController: UIViewController {
             self?.present(picker, animated: true)
         }
         
+        ///changeName Action
         let changeName = UIAction(title: "Change Name", image: UIImage(named: "pencil")) { [weak self] _ in
             let ac = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             ac.addTextField() { tf in
                 tf.placeholder = "Enter New Name"
                 tf.setupLeftImage(imageViewNamed: "person")
             }
-            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             ac.addAction(UIAlertAction(title: "OK", style: .default) {_ in
                 guard let tf = ac.textFields else { return }
                 guard let newName = tf[0].text, !newName.isEmpty, newName != self?.title else {
                     return
                 }
-                
+
                 guard let currentEmail = self?.currentEmail else { return }
                 DatabaseManager.shared.updateProfileName(email: currentEmail, newName: newName) { success in
                     guard success else { return }
@@ -111,32 +112,34 @@ final class ProfileViewController: UIViewController {
                 self?.title = newName
             })
             self?.present(ac, animated: true)
+            
             UserDefaults.standard.set(self?.user?.name, forKey: "name")
         }
         
+        ///signOut Action
         let signOut = UIAction(title: "Sign Out", image: UIImage(named: "signOut")) { [weak self] _ in
-                let ac = UIAlertController(title: "Sign Out", message: "Are you sure you'd like to sign out?", preferredStyle: .actionSheet)
-                ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                ac.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
-                    AuthManager.shared.signOut { [weak self] success in
-                        if success {
-                            DispatchQueue.main.async {
-                                UserDefaults.standard.set(nil, forKey: "email")
-                                UserDefaults.standard.set(nil, forKey: "name")
-                                
-                                let signVC = SignInViewController()
-                                signVC.navigationItem.largeTitleDisplayMode = .always
-                                
-                                let navVC = UINavigationController(rootViewController: signVC)
-                                navVC.navigationBar.prefersLargeTitles = true
-                                navVC.modalPresentationStyle = .fullScreen
-                                self?.present(navVC, animated: true)
-                            }
+            Alert.showCompletionActionSheet(
+                vc: self ?? UIViewController(),
+                title: "Sign Out",
+                message: "Are you sure you'd like to sign out?") {
+                AuthManager.shared.signOut { [weak self] success in
+                    if success {
+                        DispatchQueue.main.async {
+                            UserDefaults.standard.set(nil, forKey: "email")
+                            UserDefaults.standard.set(nil, forKey: "name")
+                            
+                            let signVC = SignInViewController()
+                            signVC.navigationItem.largeTitleDisplayMode = .always
+                            
+                            let navVC = UINavigationController(rootViewController: signVC)
+                            navVC.navigationBar.prefersLargeTitles = true
+                            navVC.modalPresentationStyle = .fullScreen
+                            self?.present(navVC, animated: true)
                         }
                     }
-                }))
-                self?.present(ac, animated: true)
+                }
             }
+        }
         
         let menu = UIMenu(title: "Settings", image: nil, children: [changePhoto, changeName, signOut])
         return menu
