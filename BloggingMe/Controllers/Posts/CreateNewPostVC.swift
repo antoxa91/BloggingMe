@@ -103,10 +103,7 @@ final class CreateNewPostVC: UITabBarController {
               let email = UserDefaults.standard.string(forKey: "email"),
               !title.trimmingCharacters(in: .whitespaces).isEmpty,
               !body.trimmingCharacters(in: .whitespaces).isEmpty else {
-            
-            let ac = UIAlertController(title: "Enter Post Details", message: "Please enter a title, body, and select a image to cotinue.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
-            present(ac, animated: true)
+            Alert.showAlert(vc: self, title: "Enter Post Details", message: "Please enter a title, body, and select a image to cotinue")
             return
         }
         

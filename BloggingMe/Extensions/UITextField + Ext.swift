@@ -1,5 +1,5 @@
 //
-//  Extensions UIButton + UITextField.swift
+//  UITextField + Ext.swift
 //  BloggingMe
 //
 //  Created by Антон Стафеев on 07.10.2022.
@@ -35,30 +35,6 @@ extension UITextField {
         self.tintColor = .lightGray
     }
     
-    func addDoneButton() {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.resignFirstResponder))
-        toolbar.items = [flexibleSpace, doneButton]
-        self.inputAccessoryView = toolbar
-    }
-}
-
-// MARK: - UIButton
-extension UIButton {
-    func animateError() {
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 10, animations: {
-            self.alpha = 0.5
-            self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            self.transform = .identity
-            self.alpha = 1
-        })
-    }
-}
-
-// MARK: - UITextView
-extension UITextView {
     func addDoneButton() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
