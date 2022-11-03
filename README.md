@@ -22,7 +22,7 @@ Firebase Firestore  is used to store information about the users and their posts
 
 :white_check_mark: Dark mode supported. 
 
-:white_check_mark: Checking if an email exists
+:white_check_mark: Checking if an email exists here [app.kickbox.com](https://app.kickbox.com)
 
 + UIKit
 + UITableView
@@ -39,12 +39,16 @@ Firebase Firestore  is used to store information about the users and their posts
 ### Screen Recording
 
 ___
-![signInError](https://user-images.githubusercontent.com/69522563/199493974-98570596-86c5-48ea-9691-6f8f6dd0d69e.gif)
-![SignUPVC](https://user-images.githubusercontent.com/69522563/199494014-6809d655-41d4-4fdf-ae82-e970067767a4.png)
 
+#### Sign In & Sign Up
+![SignIn](https://user-images.githubusercontent.com/69522563/199737570-284c89b3-dfb4-48e4-826f-467699235058.gif)
+![SignUperrorsRegExample](https://user-images.githubusercontent.com/69522563/199737609-7ec9aabf-5726-4c66-931b-33fbf178d9b8.gif)
+
+#### Home Screen, Detail Post Screen & Create Post
 ![home+detail](https://user-images.githubusercontent.com/69522563/199494042-caea057c-69c3-4a71-ab80-0639ed2370b9.gif)
 ![createPost](https://user-images.githubusercontent.com/69522563/199494076-74628721-eaf3-439e-ab14-251a07f6f191.gif)
 
+#### User Profile
 ![Profile](https://user-images.githubusercontent.com/69522563/199494090-a441870e-8738-4e36-86a6-86d0c5e4d83f.gif)
 
 
@@ -54,8 +58,16 @@ ___
 
 1. Clone or download the project to your local machine
 2. Install pod file in project. Pods are used: `FirebaseCore`, `FirebaseStorage`, `FirebaseFirestore`, `FirebaseAuth`, `ShimmerSwift`.
-3. You need to set up your own Firebase instance for the backend and copy this file to project `google-service.plist`.
-4. Open the project in Xcode
-4. Run the simulator
+3. Replace  `apiKey`  with your valid app.kickbox.com key in `NetworkRequest.swift`
+   ```swift
+   class NetworkRequest {
+   ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... 
+   16       let urlString = "https://api.kickbox.com/v2/verify?email=\(varifableMail)&apikey=\(apiKey)"   
+   ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... 
+   }
+   ```
+4. You need to set up your own Firebase instance for the backend and copy this file to project `google-service.plist`.
+5. Open the project in Xcode
+6. Run the simulator
 
 [:arrow_up:](#anchor)
