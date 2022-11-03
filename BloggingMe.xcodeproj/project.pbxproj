@@ -44,6 +44,7 @@
 		C5F4A93E2913B8610032CAB0 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4A93D2913B8610032CAB0 /* Alerts.swift */; };
 		C5F4A9412913E1590032CAB0 /* UITextView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4A9402913E1590032CAB0 /* UITextView + Ext.swift */; };
 		C5F4A9432913E18D0032CAB0 /* UIButton + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4A9422913E18D0032CAB0 /* UIButton + Ext.swift */; };
+		C5F4A9452913F6670032CAB0 /* MailApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4A9442913F6670032CAB0 /* MailApiKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		C5F4A93D2913B8610032CAB0 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		C5F4A9402913E1590032CAB0 /* UITextView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView + Ext.swift"; sourceTree = "<group>"; };
 		C5F4A9422913E18D0032CAB0 /* UIButton + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Ext.swift"; sourceTree = "<group>"; };
+		C5F4A9442913F6670032CAB0 /* MailApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailApiKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +269,7 @@
 		C5F4A9362913AB530032CAB0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C5F4A9442913F6670032CAB0 /* MailApiKey.swift */,
 				C5F4A9392913AB730032CAB0 /* NetworkRequest.swift */,
 				C5F4A93B2913AB7C0032CAB0 /* NetworkDataFetch.swift */,
 			);
@@ -441,6 +444,7 @@
 				C5DB5B9528FE9A0600334EC7 /* PostHeaderTableViewCellViewModel.swift in Sources */,
 				C5F4A9432913E18D0032CAB0 /* UIButton + Ext.swift in Sources */,
 				C5F4A93E2913B8610032CAB0 /* Alerts.swift in Sources */,
+				C5F4A9452913F6670032CAB0 /* MailApiKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
