@@ -98,14 +98,35 @@ final class SignUpViewController: UIViewController {
     }
     
     @objc private func didTapSignUp() {
-        #error("Регистр с левой почты")
-        guard let email = emailField.text, !email.isEmpty,
-              let password = createPasswordField.text, !password.isEmpty, createPasswordField.text == confirmPasswordField.text,
+        guard let email = emailField.text, !email.isEmpty, email.isValid(),
+              let password = createPasswordField.text, !password.isEmpty,
               let name = nameField.text, !name.isEmpty else {
             signUpButton.animateError()
             return
         }
         
+        if createPasswordField.text != confirmPasswordField.text {
+            Alert.showErrorAlert(vc: self, message: "Passwords do not match")
+        }
+        
+        NetworkDataFetch.shared.fetchMail(verifableMail: email) {[weak self] result, error in
+            
+            guard let result = result, result.success, error == nil else {
+                    guard let errorDescription = error?.localizedDescription else { return }
+                    Alert.showErrorAlert(vc: self ?? UIViewController(), message: errorDescription)
+                    return
+                }
+            
+            let emailStatus = result.result
+            if emailStatus == "risky" || emailStatus == "deliverable" {
+                self?.createAccount(name: name, email: email, password: password)
+            } else {
+                Alert.showAlert(vc: self ?? UIViewController(), title: emailStatus, message: result.reasonDescription)
+            }
+        }
+    }
+    
+    private func createAccount(name: String, email: String, password: String) {
         AuthManager.shared.singUp(email: email, password: password) { [weak self] success in
             if success {
                 let newUser = User(name: name, email: email, profilePictureRef: nil)
@@ -124,9 +145,7 @@ final class SignUpViewController: UIViewController {
                     }
                 }
             } else {
-                let ac = UIAlertController(title: "Failed to create account", message: "Try again", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .destructive))
-                self?.present(ac, animated: true)
+                Alert.showErrorAlert(vc: self ?? UIViewController(), message: "Failed to create account. \n Please, try again")
             }
         }
     }
