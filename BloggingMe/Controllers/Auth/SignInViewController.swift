@@ -82,29 +82,29 @@ final class SignInViewController: UIViewController {
         createAccountButton.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside)
     }
     
-    
     @objc private func didTapSignIn() {
-#error("Проработать вход с левой почты")
-        guard let email = emailField.text, !email.isEmpty,
+        guard let email = emailField.text, !email.isEmpty, email.isValid(),
               let password = passwordField.text, !password.isEmpty else {
             signInButton.animateError()
             HapticsManager.shared.vibrate(for: .error)
             return
         }
         
-        
         AuthManager.shared.singIn(email: email, password: password) { [weak self] success in
-            self?.signInButton.configuration?.showsActivityIndicator = true
-            self?.signInButton.configuration?.title = ""
-            guard success else { return }
-            
-            DispatchQueue.main.async {
-                let vc = TabBarController()
-                vc.modalPresentationStyle = .fullScreen
-                self?.present(vc, animated: true)
-                HapticsManager.shared.vibrate(for: .success)
+            if success {
+                self?.signInButton.configuration?.showsActivityIndicator = true
+                self?.signInButton.configuration?.title = ""
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    let vc = TabBarController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc, animated: true)
+                    HapticsManager.shared.vibrate(for: .success)
+                }
+                UserDefaults.standard.set(email, forKey: "email")
+            } else {
+                HapticsManager.shared.vibrate(for: .error)
+                Alert.showErrorAlert(vc: self ?? UIViewController(), message: "The account does not exist or the username & password are entered incorrectly")
             }
-            UserDefaults.standard.set(email, forKey: "email")
         }
     }
     
