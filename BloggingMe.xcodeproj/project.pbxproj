@@ -144,15 +144,15 @@
 		C58C307028EEEC160099ACD7 /* BloggingMe */ = {
 			isa = PBXGroup;
 			children = (
-				C55F4AC4290A9B2D005C69D4 /* fonts */,
-				C58C308928EEF1A40099ACD7 /* Application */,
-				C58C308828EEF1930099ACD7 /* Managers */,
-				C58C308528EEF1760099ACD7 /* Controllers */,
-				C58C308628EEF17F0099ACD7 /* Views */,
-				C58C308728EEF1840099ACD7 /* Models */,
 				C5F4A93D2913B8610032CAB0 /* Alerts.swift */,
+				C58C308928EEF1A40099ACD7 /* Application */,
+				C58C308528EEF1760099ACD7 /* Controllers */,
 				C5F4A93F2913E1330032CAB0 /* Extensions */,
+				C55F4AC4290A9B2D005C69D4 /* fonts */,
 				C58C308A28EEF1F90099ACD7 /* Helpers */,
+				C58C308828EEF1930099ACD7 /* Managers */,
+				C58C308728EEF1840099ACD7 /* Models */,
+				C58C308628EEF17F0099ACD7 /* Views */,
 			);
 			path = BloggingMe;
 			sourceTree = "<group>";
