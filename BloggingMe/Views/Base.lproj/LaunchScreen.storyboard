@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="width" constant="200" id="KHZ-hK-7bo"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BloggingMe" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" showsExpansionTextWhenTruncated="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m23-OE-4fz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BloggingMe" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" showsExpansionTextWhenTruncated="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m23-OE-4fz">
                                 <rect key="frame" x="20" y="552" width="350" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Nc9-QH-nva"/>
