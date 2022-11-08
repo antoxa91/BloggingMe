@@ -49,7 +49,8 @@ ___
 ![createPost](https://user-images.githubusercontent.com/69522563/199494076-74628721-eaf3-439e-ab14-251a07f6f191.gif)
 
 #### User Profile
-![Profile](https://user-images.githubusercontent.com/69522563/199494090-a441870e-8738-4e36-86a6-86d0c5e4d83f.gif)
+![Profile Settings](https://user-images.githubusercontent.com/69522563/200550024-7b3b8145-f83a-49a0-8ee9-4296e89fcb6a.gif)
+![Dark mode, delete row, sign out](https://user-images.githubusercontent.com/69522563/200550036-af0c31b4-6e4e-45fe-9984-25a9b4eac3e9.gif)
 
 
 ### Installation
