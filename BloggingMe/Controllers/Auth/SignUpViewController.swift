@@ -67,6 +67,7 @@ final class SignUpViewController: UIViewController {
         button.configuration?.title = "Create Account"
         button.configuration?.baseBackgroundColor = .systemGreen
         button.configuration?.baseForegroundColor = .white
+        button.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -79,7 +80,6 @@ final class SignUpViewController: UIViewController {
         view.backgroundColor = UIColor(named: "PrimaryBackground")
         setupViews()
         setConstraints()
-        signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
     
