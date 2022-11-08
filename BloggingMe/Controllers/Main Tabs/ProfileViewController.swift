@@ -141,7 +141,16 @@ final class ProfileViewController: UIViewController {
             }
         }
         
-        let menu = UIMenu(title: "Settings", image: nil, children: [changePhoto, changeName, signOut])
+        ///RateApp Action
+        let rateApp = UIAction(title: "Rate App", image: UIImage(named: "star_filled")) { [weak self] _ in
+            let vc = RateAppVC()
+            vc.sheetPresentationController?.preferredCornerRadius = 30
+            vc.sheetPresentationController?.prefersGrabberVisible = true
+            vc.sheetPresentationController?.detents = [.medium(), .large()]
+            self?.present(vc, animated: true)
+        }
+        
+        let menu = UIMenu(title: "Settings", image: nil, children: [changePhoto, changeName, signOut, rateApp])
         return menu
     }
 }
