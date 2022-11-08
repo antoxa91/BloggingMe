@@ -53,8 +53,15 @@ final class SignInViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    var stackView = UIStackView()
+        
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 8
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,13 +75,11 @@ final class SignInViewController: UIViewController {
     
     private func setupViews() {
         view.addSubview(headerView)
-        stackView = UIStackView(arrangedSubviews: [emailField, passwordField, signInButton])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = view.frame.size.height * 0.01
         view.addSubview(stackView)
         view.addSubview(createAccountButton)
+        stackView.addArrangedSubview(emailField)
+        stackView.addArrangedSubview(passwordField)
+        stackView.addArrangedSubview(signInButton)
     }
     
     private func setButtonTargets() {

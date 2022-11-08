@@ -116,6 +116,15 @@ final class ProfileViewController: UIViewController {
             UserDefaults.standard.set(self?.user?.name, forKey: "name")
         }
         
+        ///RateApp Action
+        let rateApp = UIAction(title: "Rate App", image: UIImage(named: "star_filled")) { [weak self] _ in
+            let vc = RateAppVC()
+            vc.sheetPresentationController?.preferredCornerRadius = 30
+            vc.sheetPresentationController?.prefersGrabberVisible = true
+            vc.sheetPresentationController?.detents = [.medium(), .large()]
+            self?.present(vc, animated: true)
+        }
+        
         ///signOut Action
         let signOut = UIAction(title: "Sign Out", image: UIImage(named: "signOut")) { [weak self] _ in
             Alert.showCompletionActionSheet(
@@ -140,17 +149,8 @@ final class ProfileViewController: UIViewController {
                 }
             }
         }
-        
-        ///RateApp Action
-        let rateApp = UIAction(title: "Rate App", image: UIImage(named: "star_filled")) { [weak self] _ in
-            let vc = RateAppVC()
-            vc.sheetPresentationController?.preferredCornerRadius = 30
-            vc.sheetPresentationController?.prefersGrabberVisible = true
-            vc.sheetPresentationController?.detents = [.medium(), .large()]
-            self?.present(vc, animated: true)
-        }
-        
-        let menu = UIMenu(title: "Settings", image: nil, children: [changePhoto, changeName, signOut, rateApp])
+                
+        let menu = UIMenu(title: "Settings", image: nil, children: [changePhoto, changeName, rateApp, signOut])
         return menu
     }
 }
