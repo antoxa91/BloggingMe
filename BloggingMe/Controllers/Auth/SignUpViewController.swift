@@ -72,7 +72,14 @@ final class SignUpViewController: UIViewController {
         return button
     }()
     
-    var stackView = UIStackView()
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 8
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,12 +92,12 @@ final class SignUpViewController: UIViewController {
     
     private func setupViews() {
         view.addSubview(headerView)
-        stackView = UIStackView(arrangedSubviews: [nameField, emailField, createPasswordField, confirmPasswordField, signUpButton])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = view.frame.size.height * 0.01
         view.addSubview(stackView)
+        stackView.addArrangedSubview(nameField)
+        stackView.addArrangedSubview(emailField)
+        stackView.addArrangedSubview(createPasswordField)
+        stackView.addArrangedSubview(confirmPasswordField)
+        stackView.addArrangedSubview(signUpButton)
     }
     
     @objc private func hideKeyboard() {
