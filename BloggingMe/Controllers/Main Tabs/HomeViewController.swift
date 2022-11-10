@@ -22,7 +22,7 @@ final class HomeViewController: UIViewController {
         return tableView
     }()
     
-    let refreshControl: UIRefreshControl = {
+    lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(fetchAllPosts), for: .valueChanged)
         return refreshControl

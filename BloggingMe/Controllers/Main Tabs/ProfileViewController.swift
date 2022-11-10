@@ -26,7 +26,7 @@ final class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    let refreshControl: UIRefreshControl = {
+    lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(fetchPosts), for: .valueChanged)
         return refreshControl
