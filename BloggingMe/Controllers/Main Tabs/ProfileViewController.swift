@@ -99,9 +99,9 @@ final class ProfileViewController: UIViewController {
                 tf.placeholder = "Enter New Name"
                 tf.setupLeftImage(imageViewNamed: "person")
             }
-            ac.addAction(UIAlertAction(title: "OK", style: .default) {_ in
-                guard let tf = ac.textFields else { return }
-                guard let newName = tf[0].text, !newName.isEmpty, newName != self?.title else {
+            ac.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                guard let tf = ac.textFields?.first else { return }
+                guard let newName = tf.text, !newName.isEmpty, newName != self?.title else {
                     return
                 }
 
